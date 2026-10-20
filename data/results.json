@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-20T06:59:09Z",
+  "sources": {
+    "sos": {
+      "name": "Texas Secretary of State",
+      "url": "https://results.texas-election.com/races",
+      "ok": true,
+      "updatedAt": "2026-10-20T06:59:09Z",
+      "error": null,
+      "errorSince": null
+    }
+  },
+  "races": {
+    "senate": {
+      "sos": {
+        "available": false,
+        "election": null,
+        "office": null,
+        "candidates": {
+          "D": {
+            "name": null,
+            "votes": 0,
+            "pct": 0
+          },
+          "R": {
+            "name": null,
+            "votes": 0,
+            "pct": 0
+          }
+        },
+        "otherVotes": 0,
+        "totalVotes": 0,
+        "pctReporting": 0,
+        "countiesReporting": 0,
+        "sosTimestamp": null,
+        "counties": {}
+      }
+    },
+    "governor": {
+      "sos": {
+        "available": false,
+        "election": null,
+        "office": null,
+        "candidates": {
+          "D": {
+            "name": null,
+            "votes": 0,
+            "pct": 0
+          },
+          "R": {
+            "name": null,
+            "votes": 0,
+            "pct": 0
+          }
+        },
+        "otherVotes": 0,
+        "totalVotes": 0,
+        "pctReporting": 0,
+        "countiesReporting": 0,
+        "sosTimestamp": null,
+        "counties": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "$id": "markets.schema.json",
+  "title": "Prediction-market win probabilities",
+  "type": "object",
+  "required": ["schemaVersion", "updatedAt", "sources", "races"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "updatedAt": { "type": ["string", "null"], "format": "date-time" },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kalshi": { "$ref": "#/$defs/sourceStatus" },
+        "polymarket": { "$ref": "#/$defs/sourceStatus" }
+      }
+    },
+    "races": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["senate", "governor"],
+      "properties": {
+        "senate": { "$ref": "#/$defs/raceSlot" },
+        "governor": { "$ref": "#/$defs/raceSlot" }
+      }
+    }
+  },
+  "$defs": {
+    "raceSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kalshi": { "$ref": "#/$defs/odds" },
+        "polymarket": { "$ref": "#/$defs/odds" }
+      }
+    },
+    "side": {
+      "type": "object",
+      "required": ["name", "price", "basis"],
+      "properties": {
+        "ticker": { "type": "string" },
+        "id": { "type": "string" },
+        "name": { "type": ["string", "null"] },
+        "price": { "type": "number", "minimum": 0, "maximum": 1 },
+        "basis": { "enum": ["mid", "last"] }
+      },
+      "additionalProperties": false
+    },
+    "odds": {
+      "type": "object",
+      "required": ["market", "title", "url", "probD", "probR", "markets"],
+      "additionalProperties": false,
+      "properties": {
+        "market": { "type": "string", "minLength": 1 },
+        "title": { "type": "string" },
+        "url": { "type": "string", "pattern": "^https://" },
+        "probD": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "probR": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "markets": {
+          "type": "object", "required": ["D", "R"], "additionalProperties": false,
+          "properties": { "D": { "$ref": "#/$defs/side" }, "R": { "$ref": "#/$defs/side" } }
+        }
+      }
+    }
+  }
+}

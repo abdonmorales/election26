@@ -1,28 +1,35 @@
 name: Deploy to GitHub Pages
 
+# Runs on pushes to main (dashboard publishes), when called from the data workflow, and when the
+# election-night loop dispatches it. Data commits made with GITHUB_TOKEN do not trigger `push`,
+# so the data workflow never relies on that trigger.
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Keep only the newest deploy; each projection publish triggers one.
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Never cancel a running deploy; a newer queued one replaces any older queued one.
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Check out the branch tip, not the triggering commit, so a deploy called right after a
+      # data commit includes it.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
       - name: Assemble site
         run: |
           mkdir _site

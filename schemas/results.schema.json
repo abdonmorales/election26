@@ -1,0 +1,79 @@
+{
+  "$id": "results.schema.json",
+  "title": "Official returns (Texas SOS)",
+  "type": "object",
+  "required": ["schemaVersion", "updatedAt", "sources", "races"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "updatedAt": { "type": ["string", "null"], "format": "date-time" },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "sos": { "$ref": "#/$defs/sourceStatus" } }
+    },
+    "races": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["senate", "governor"],
+      "properties": {
+        "senate": { "$ref": "#/$defs/raceSlot" },
+        "governor": { "$ref": "#/$defs/raceSlot" }
+      }
+    }
+  },
+  "$defs": {
+    "raceSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "sos": { "$ref": "#/$defs/returns" } }
+    },
+    "candidate": {
+      "type": "object",
+      "required": ["name", "votes", "pct"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": ["string", "null"], "maxLength": 80 },
+        "votes": { "type": "integer", "minimum": 0 },
+        "pct": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "returns": {
+      "type": "object",
+      "required": ["available", "election", "office", "candidates", "otherVotes", "totalVotes", "pctReporting", "countiesReporting", "sosTimestamp", "counties"],
+      "additionalProperties": false,
+      "properties": {
+        "available": { "type": "boolean" },
+        "election": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "object", "required": ["id", "name"], "additionalProperties": false,
+              "properties": { "id": { "type": "string", "pattern": "^\\d+$" }, "name": { "type": "string" } } }
+          ]
+        },
+        "office": { "type": ["string", "null"] },
+        "candidates": {
+          "type": "object",
+          "required": ["D", "R"],
+          "additionalProperties": false,
+          "properties": { "D": { "$ref": "#/$defs/candidate" }, "R": { "$ref": "#/$defs/candidate" } }
+        },
+        "otherVotes": { "type": "integer", "minimum": 0 },
+        "totalVotes": { "type": "integer", "minimum": 0 },
+        "pctReporting": { "type": "number", "minimum": 0, "maximum": 100 },
+        "countiesReporting": { "type": "integer", "minimum": 0, "maximum": 254 },
+        "sosTimestamp": { "type": ["string", "null"] },
+        "counties": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^48\\d{3}$": {
+              "type": "array", "minItems": 4, "maxItems": 4,
+              "items": { "type": "number", "minimum": 0 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

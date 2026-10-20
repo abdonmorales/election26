@@ -2,12 +2,18 @@ import {
   STATUS_LABELS, BINS, RAMP, h,
   signedMargin, formatMargin, formatPlus, rating, bannerMessages, colorFor,
   countyBaselineMargin, statewideBaselineMargin, projectedCountyMargin, resultMargin, relativeTime,
+  mergedCounties,
 } from "./common.js";
 
 const POLL_MS = 20000;
 const ELECTION_DAY = Date.parse("2026-11-03T07:00:00-06:00"); // polls open, Central Time
 
-const state = { data: null, baseline: null, topo: null, cards: new Map(), failures: 0, raceKey: "" };
+const state = {
+  data: null, results: null, polls: null, markets: null,
+  baseline: null, topo: null, cards: new Map(), failures: 0, raceKey: "",
+};
+// Automated data files. A failed fetch keeps whatever we had; the page never blanks out.
+const FEEDS = { results: "data/results.json", polls: "data/polls.json", markets: "data/markets.json" };
 
 /* ---------------- Data loading ---------------- */
 
@@ -19,13 +25,18 @@ async function fetchJSON(url, bust = false) {
 
 async function poll() {
   try {
-    const data = await fetchJSON("data/projections.json", true);
+    const [data, ...feeds] = await Promise.all([
+      fetchJSON("data/projections.json", true),
+      ...Object.values(FEEDS).map((url) => fetchJSON(url, true).catch((err) => { console.warn(err); return null; })),
+    ]);
     state.failures = 0;
     document.getElementById("live-pill").classList.remove("stale");
-    if (!state.data || data.updatedAt !== state.data.updatedAt || JSON.stringify(data) !== JSON.stringify(state.data)) {
-      state.data = data;
-      render();
-    }
+    let changed = !state.data || JSON.stringify(data) !== JSON.stringify(state.data);
+    state.data = data;
+    Object.keys(FEEDS).forEach((key, i) => {
+      if (feeds[i] && JSON.stringify(feeds[i]) !== JSON.stringify(state[key])) { state[key] = feeds[i]; changed = true; }
+    });
+    if (changed) render();
   } catch (err) {
     console.warn(err);
     if (++state.failures >= 3) document.getElementById("live-pill").classList.add("stale");
@@ -75,7 +86,7 @@ function updateClock() {
 /* ---------------- Race cards ---------------- */
 
 function raceSummary(race) {
-  const counties = race.results?.counties || {};
+  const { counties } = mergedCounties(race, state.results);
   let r = 0, d = 0;
   for (const v of Object.values(counties)) { r += v[0] || 0; d += v[1] || 0; }
   return { hasResults: Object.keys(counties).length > 0 && r + d > 0, r, d };
@@ -108,6 +119,7 @@ function buildCard(race) {
       refs.segD, refs.segR, h("div", { class: "meter-mid" })),
     h("div", { class: "meter-labels" }, refs.meterD, h("span", {}, "50%"), refs.meterR),
     refs.results,
+    refs.signals = h("section", { class: "signals", "aria-label": "Other signals, separate from my projection" }),
     refs.note,
     refs.mapWrap,
     refs.mode,
@@ -165,7 +177,7 @@ function countyInfo(raceId, fips) {
   if (!race || !row) return null;
   const sm = signedMargin(race.projection);
   const swing = sm === null ? 0 : sm - statewideBaselineMargin(state.baseline);
-  const res = race.results?.counties?.[fips];
+  const res = mergedCounties(race, state.results).counties[fips];
   const resM = res ? resultMargin(res) : null;
   return {
     race, row, name: row[0],
@@ -248,12 +260,13 @@ function updateCard(race, { refs }) {
   refs.meterR.textContent = label ? `${c.R.split(" ").at(-1)} ${rShare.toFixed(1)}%` : "";
 
   if (summary.hasResults) {
-    const pr = Number(race.results.pctReporting) || 0;
-    refs.results.textContent = `Votes counted: ${c.D} ${summary.d.toLocaleString()} · ${c.R} ${summary.r.toLocaleString()}` + (pr ? ` · ~${pr}% of expected vote in` : "");
+    const pr = Number(race.results?.pctReporting) || state.results?.races?.[race.id]?.sos?.pctReporting || 0;
+    refs.results.textContent = `Votes counted: ${c.D} ${summary.d.toLocaleString()} · ${c.R} ${summary.r.toLocaleString()}` + (pr ? ` · ${pr}% of precincts reporting` : "");
     refs.results.hidden = false;
   } else {
     refs.results.hidden = true;
   }
+  renderSignals(race, refs.signals);
   refs.note.textContent = race.note || "";
   refs.note.hidden = !race.note;
 
@@ -288,6 +301,73 @@ function updateCard(race, { refs }) {
       h("td", { class: "r num" }, formatMargin(i.proj)),
       h("td", { class: "r num" }, i.res ? `${formatMargin(i.resM)} (${i.res[2] ?? 0}%)` : "—"));
   }));
+}
+
+/* ---------------- Signals: polls, markets, official returns ---------------- */
+
+function sourceLine(status, label, href) {
+  const bits = [];
+  bits.push(href ? h("a", { href, target: "_blank", rel: "noopener noreferrer" }, label) : label);
+  if (status?.updatedAt) bits.push(` · updated ${relativeTime(status.updatedAt)}`);
+  const line = h("div", { class: "sig-src" }, bits);
+  if (status && status.ok === false) {
+    line.append(h("div", { class: "sig-warn" }, `⚠ Source unavailable since ${relativeTime(status.errorSince)} — showing last good data`));
+  }
+  return line;
+}
+
+const lastName = (n) => String(n || "").trim().split(/\s+/).pop();
+
+function pollSignal(race) {
+  const p = state.polls?.races?.[race.id]?.wikipedia;
+  const status = state.polls?.sources?.wikipedia;
+  const avg = p?.average;
+  const body = avg
+    ? [h("div", { class: "sig-value num" }, formatMargin(avg.margin)),
+       h("div", { class: "sig-detail num" }, `${lastName(race.candidates.D)} ${avg.D.toFixed(1)} · ${lastName(race.candidates.R)} ${avg.R.toFixed(1)} · ${avg.pollCount} pollster${avg.pollCount === 1 ? "" : "s"}, latest ${avg.latestPoll}`)]
+    : [h("div", { class: "sig-value muted" }, "—"), h("div", { class: "sig-detail" }, "No trusted polls yet")];
+  return h("div", { class: "signal" }, h("div", { class: "sig-label" }, "Polling average"), ...body,
+    sourceLine(status, "Trusted polls via Wikipedia", p?.page));
+}
+
+function marketSignal(race) {
+  const slot = state.markets?.races?.[race.id] || {};
+  const rows = [];
+  for (const [key, label] of [["kalshi", "Kalshi"], ["polymarket", "Polymarket"]]) {
+    const m = slot[key];
+    const status = state.markets?.sources?.[key];
+    if (!m) { rows.push(h("div", { class: "sig-row" }, h("span", {}, label), h("span", { class: "muted" }, "—"))); continue; }
+    const fav = m.probD >= m.probR ? "D" : "R";
+    rows.push(h("div", { class: "sig-row" },
+      h("span", {}, label),
+      h("span", { class: "num" }, `${lastName(race.candidates[fav])} ${fav === "D" ? m.probD : m.probR}%`)));
+    rows.push(sourceLine(status, m.market, m.url));
+  }
+  return h("div", { class: "signal" }, h("div", { class: "sig-label" }, "Market odds to win"), ...rows);
+}
+
+function returnsSignal(race) {
+  const r = state.results?.races?.[race.id]?.sos;
+  const status = state.results?.sources?.sos;
+  const { manualCount } = mergedCounties(race, state.results);
+  let body;
+  if (r?.available && r.totalVotes > 0) {
+    body = [
+      h("div", { class: "sig-value num" }, `${r.pctReporting}% in`),
+      h("div", { class: "sig-detail num" }, `${lastName(race.candidates.D)} ${r.candidates.D.pct}% · ${lastName(race.candidates.R)} ${r.candidates.R.pct}% · ${r.totalVotes.toLocaleString()} votes`),
+    ];
+  } else {
+    body = [h("div", { class: "sig-value muted" }, "Not reporting"), h("div", { class: "sig-detail" }, "Returns start after polls close at 7 PM CT on Nov 3")];
+  }
+  if (manualCount) body.push(h("div", { class: "sig-detail" }, `${manualCount} count${manualCount === 1 ? "y" : "ies"} entered manually`));
+  return h("div", { class: "signal" }, h("div", { class: "sig-label" }, "Official returns"), ...body,
+    sourceLine(status, "Texas Secretary of State", status?.url));
+}
+
+function renderSignals(race, el) {
+  el.replaceChildren(
+    h("div", { class: "sig-head" }, "Other signals — not part of my projection"),
+    h("div", { class: "sig-grid" }, pollSignal(race), marketSignal(race), returnsSignal(race)));
 }
 
 function renderFeed() {

@@ -1,0 +1,93 @@
+{
+  "$id": "polls.schema.json",
+  "title": "Trusted polls and polling average",
+  "type": "object",
+  "required": ["schemaVersion", "updatedAt", "sources", "races"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "updatedAt": { "type": ["string", "null"], "format": "date-time" },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "wikipedia": { "$ref": "#/$defs/sourceStatus" } }
+    },
+    "races": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["senate", "governor"],
+      "properties": {
+        "senate": { "$ref": "#/$defs/raceSlot" },
+        "governor": { "$ref": "#/$defs/raceSlot" }
+      }
+    }
+  },
+  "$defs": {
+    "raceSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "wikipedia": { "$ref": "#/$defs/racePolls" } }
+    },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "pct": { "type": "number", "minimum": 0, "maximum": 100 },
+    "poll": {
+      "type": "object",
+      "required": ["pollster", "trustedAs", "start", "end", "n", "population", "D", "R", "margin", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "pollster": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "trustedAs": { "type": "string", "minLength": 1 },
+        "start": { "$ref": "#/$defs/date" },
+        "end": { "$ref": "#/$defs/date" },
+        "n": { "type": ["integer", "null"], "minimum": 1 },
+        "population": { "enum": ["LV", "RV", "A", null] },
+        "D": { "$ref": "#/$defs/pct" },
+        "R": { "$ref": "#/$defs/pct" },
+        "margin": { "type": "number", "minimum": -100, "maximum": 100 },
+        "url": { "type": ["string", "null"] }
+      }
+    },
+    "average": {
+      "type": "object",
+      "required": ["margin", "D", "R", "pollCount", "asOf", "latestPoll", "contributions"],
+      "additionalProperties": false,
+      "properties": {
+        "margin": { "type": "number", "minimum": -100, "maximum": 100 },
+        "D": { "type": "number", "minimum": 0, "maximum": 100 },
+        "R": { "type": "number", "minimum": 0, "maximum": 100 },
+        "pollCount": { "type": "integer", "minimum": 1 },
+        "asOf": { "$ref": "#/$defs/date" },
+        "latestPoll": { "$ref": "#/$defs/date" },
+        "contributions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["pollster", "end", "weight", "adjustedMargin"],
+            "additionalProperties": false,
+            "properties": {
+              "pollster": { "type": "string" },
+              "end": { "$ref": "#/$defs/date" },
+              "weight": { "type": "number", "minimum": 0 },
+              "adjustedMargin": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "racePolls": {
+      "type": "object",
+      "required": ["page", "candidates", "totalPollsOnPage", "polls", "average"],
+      "additionalProperties": false,
+      "properties": {
+        "page": { "type": "string", "pattern": "^https://" },
+        "candidates": {
+          "type": "object", "required": ["D", "R"], "additionalProperties": false,
+          "properties": { "D": { "type": "string" }, "R": { "type": "string" } }
+        },
+        "totalPollsOnPage": { "type": "integer", "minimum": 0 },
+        "polls": { "type": "array", "items": { "$ref": "#/$defs/poll" } },
+        "average": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/average" }] }
+      }
+    }
+  }
+}

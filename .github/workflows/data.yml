@@ -1,0 +1,109 @@
+name: Update election data
+
+# Schedules are UTC. GitHub may start scheduled runs a few minutes late under load.
+on:
+  schedule:
+    - cron: "17 */3 * * *"        # normal: every 3 hours
+    - cron: "*/5 * 31 10 *"       # election week (Oct 31) every 5 minutes
+    - cron: "*/5 * 1-6 11 *"      # election week (Nov 1-6) every 5 minutes
+    - cron: "40 23 3 11 *"        # election night, part 1: 5:40 PM CST Nov 3 -> loop until ~11:30 PM
+    - cron: "20 5 4 11 *"         # election night, part 2: 11:20 PM CST -> loop until 2:15 AM Nov 4
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "once = fetch everything one time; night = run the election-night loop"
+        type: choice
+        options: [once, night]
+        default: once
+      minutes:
+        description: "night mode only: how long to loop (max 345)"
+        default: "60"
+
+permissions:
+  contents: write    # commit data files
+  actions: write     # election night: dispatch the Pages workflow after each change
+  pages: write       # deploy job
+  id-token: write    # deploy job
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    # One writer at a time. The night loop has its own group so 5-minute runs (which exit
+    # immediately during the night window) never queue behind it.
+    concurrency:
+      group: ${{ (github.event.schedule == '40 23 3 11 *' || github.event.schedule == '20 5 4 11 *' || inputs.mode == 'night') && 'data-night' || 'data' }}
+      cancel-in-progress: false
+    outputs:
+      changed: ${{ steps.run.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Pick mode
+        id: mode
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_MODE: ${{ inputs.mode }}
+          INPUT_MINUTES: ${{ inputs.minutes }}
+        run: |
+          case "$SCHEDULE" in
+            "*/5 * 31 10 *"|"*/5 * 1-6 11 *") echo "args=--window week" >> "$GITHUB_OUTPUT" ;;
+            "40 23 3 11 *"|"20 5 4 11 *")     echo "args=--window night --loop" >> "$GITHUB_OUTPUT" ;;
+            "")
+              if [ "$INPUT_MODE" = "night" ]; then
+                mins=$(( ${INPUT_MINUTES:-60} > 345 ? 345 : ${INPUT_MINUTES:-60} ))
+                echo "args=--loop --until $(date -u -d "+${mins} minutes" +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
+              else
+                echo "args=" >> "$GITHUB_OUTPUT"
+              fi ;;
+            *) echo "args=" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Only needed when the Texas SOS site answers plain requests with a Cloudflare check.
+      - name: Install Chromium for the SOS fallback
+        run: npx playwright install --with-deps chromium
+
+      - name: Configure git
+        run: |
+          git config user.name "election26-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch sources
+        id: run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node pipeline/run.js ${{ steps.mode.outputs.args }} --branch "${{ github.ref_name }}"
+
+      # The loop commits as it goes; this covers the one-shot modes.
+      - name: Commit changed data
+        if: steps.run.outputs.changed == 'true'
+        run: |
+          git add data/results.json data/polls.json data/markets.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "data: update $(git diff --cached --name-only | xargs -n1 basename | sed 's/.json//' | paste -sd, -)"
+          for i in 1 2 3 4; do
+            git pull --rebase origin "${{ github.ref_name }}" && git push origin "HEAD:${{ github.ref_name }}" && exit 0
+            sleep $((2 ** i))
+          done
+          exit 1
+
+  deploy:
+    needs: fetch
+    if: needs.fetch.outputs.changed == 'true'
+    uses: ./.github/workflows/pages.yml

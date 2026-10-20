@@ -1,4 +1,4 @@
-import { h, projectionSentence, bannerMessages, relativeTime, STATUS_LABELS } from "./common.js";
+import { h, projectionSentence, bannerMessages, relativeTime, STATUS_LABELS, suggestedMargin, formatMargin, marketProbR } from "./common.js";
 
 const FILE_PATH = "data/projections.json";
 const SESSION_KEY = "tx26.session";
@@ -10,6 +10,8 @@ const S = {
   original: null,  // data as loaded, for change detection
   data: null,      // working copy
   baseline: null,  // county names for results parsing
+  polls: null,     // data/polls.json (for the suggested margin)
+  markets: null,   // data/markets.json
 };
 
 const $ = (id) => document.getElementById(id);
@@ -204,6 +206,19 @@ function raceEditor(race) {
     h("h3", {}, "Projected winner"), winnerCtl,
     h("h3", {}, "Margin (points)"), h("div", { class: "margin-ctl" }, marginRange, marginNum), nudges);
 
+  // Fills the form from the suggestion. Nothing is published until you click Publish.
+  function applySuggestion(value) {
+    const m = Math.round(Math.abs(value) * 2) / 2;
+    if (m === 0) {
+      p.status = "tossup";
+    } else {
+      if (p.status !== "called") p.status = "projection";
+      setWinner(value > 0 ? "R" : "D");
+    }
+    for (const inp of statusCtl.querySelectorAll("input")) inp.checked = inp.value === p.status;
+    setMargin(m);
+  }
+
   refresh();
 
   return h("section", { class: "card" },
@@ -212,12 +227,13 @@ function raceEditor(race) {
       h("label", {}, "Democrat", nameD),
       h("label", {}, "Republican", nameR)),
     h("h3", {}, "Status"), statusCtl,
+    suggestionBox(race, applySuggestion),
     h("div", {}, winnerBlock),
     preview,
     h("label", { class: "stack" }, "Note", note),
     h("details", {},
-      h("summary", { class: "help" }, "County results (election night)"),
-      h("p", { class: "help" }, "Paste one county per line: name or FIPS, Republican votes, Democratic votes, % reporting. Counties not listed keep showing your projection on the map."),
+      h("summary", { class: "help" }, "Emergency override: county results"),
+      h("p", { class: "help" }, "Official returns load automatically from the Texas Secretary of State. Only use this if that feed is down or wrong: paste one county per line (name or FIPS, Republican votes, Democratic votes, % reporting). Pasted counties replace the automatic numbers for those counties until you clear them."),
       csv,
       h("div", { class: "nudges" },
         h("button", { class: "btn sm", type: "button", onclick: applyCSV }, "Apply results"),
@@ -225,6 +241,24 @@ function raceEditor(race) {
       parseOut,
       h("label", { class: "stack" }, "Statewide expected vote in (%)", pctIn)),
   );
+}
+
+/* ---------------- Suggested margin ---------------- */
+
+function suggestionBox(race, apply) {
+  const s = suggestedMargin(S.polls, S.markets, race.id);
+  if (!s) return h("div", { class: "suggest" }, h("span", { class: "help" }, "No polling or market data yet for a suggestion."));
+  const pR = marketProbR(S.markets, race.id);
+  const parts = [];
+  if (s.poll !== null) parts.push(`polls ${formatMargin(s.poll)}`);
+  if (s.market !== null) parts.push(`markets ${formatMargin(s.market)} (R ${Math.round(pR)}% to win)`);
+  return h("div", { class: "suggest" },
+    h("div", {},
+      h("div", { class: "suggest-label" }, "Suggested margin"),
+      h("div", { class: "suggest-value num" }, formatMargin(s.value)),
+      h("div", { class: "help" }, `${parts.join(" · ")} — ${s.basis}`)),
+    h("button", { class: "btn sm", type: "button", onclick: () => apply(s.value),
+      title: "Fill in the form with this margin. You still need to click Publish." }, "Use this"));
 }
 
 /* ---------------- Results CSV ---------------- */
@@ -405,6 +439,8 @@ async function init() {
   wire();
   renderPreviewTicker();
   S.baseline = await (await fetch("data/baseline-2024.json")).json();
+  const load = (f) => fetch(`data/${f}?t=${Date.now()}`, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  [S.polls, S.markets] = await Promise.all([load("polls.json"), load("markets.json")]);
   const saved = sessionStorage.getItem(SESSION_KEY);
   if (saved) {
     try { await signIn(JSON.parse(saved)); renderEditor(); }

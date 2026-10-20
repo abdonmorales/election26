@@ -1,0 +1,48 @@
+{
+  "sourceStatus": {
+    "type": "object",
+    "required": [
+      "name",
+      "url",
+      "ok",
+      "updatedAt",
+      "error",
+      "errorSince"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "url": {
+        "type": "string",
+        "pattern": "^https://"
+      },
+      "ok": {
+        "type": "boolean"
+      },
+      "updatedAt": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "format": "date-time"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "maxLength": 300
+      },
+      "errorSince": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "format": "date-time"
+      }
+    }
+  }
+}

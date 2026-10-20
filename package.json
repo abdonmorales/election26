@@ -1,0 +1,14 @@
+{
+  "name": "election26",
+  "private": true,
+  "type": "module",
+  "description": "Texas Election 26 site and data pipeline",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "fetch": "node pipeline/run.js",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "dependencies": {
+    "playwright": "1.56.1"
+  }
+}

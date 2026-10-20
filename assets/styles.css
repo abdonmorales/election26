@@ -158,6 +158,21 @@ th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line
 th { position: sticky; top: 0; background: var(--surface-2); font-weight: 600; }
 td.r { text-align: right; }
 
+/* ---------- Signals (secondary to the projection) ---------- */
+.signals { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); }
+.sig-head { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.sig-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.signal { background: var(--surface-2); border-radius: 8px; padding: 8px 10px; min-width: 0; font-size: 13px; }
+.sig-label { font-size: 11px; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: .04em; }
+.sig-value { font-size: 17px; font-weight: 700; margin-top: 2px; }
+.sig-detail { color: var(--ink-2); font-size: 12px; line-height: 1.35; }
+.sig-row { display: flex; justify-content: space-between; gap: 8px; margin-top: 3px; font-weight: 600; }
+.sig-src { color: var(--muted); font-size: 11px; margin-top: 4px; overflow-wrap: anywhere; }
+.sig-src a { color: var(--muted); }
+.sig-warn { color: var(--rep); margin-top: 2px; }
+.muted { color: var(--muted); }
+@media (max-width: 760px) { .sig-grid { grid-template-columns: 1fr; } }
+
 /* ---------- Feed ---------- */
 .feed { padding: 4px 0 24px; }
 .feed h2 { font-size: 18px; margin: 0 0 10px; }
