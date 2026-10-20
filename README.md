@@ -13,18 +13,6 @@ A live projection site for the 2026 Texas **U.S. Senate** (Talarico vs. Paxton) 
 
 Before returns come in, each county is shaded by uniform swing: its 2024 presidential margin (`data/baseline-2024.json`) shifted by the gap between my statewide projection and the 2024 statewide result (R+13.7). Once official returns arrive from the Texas Secretary of State, reporting counties are shaded by actual votes and counties with no returns are shown faded. Counties pasted into the desk's emergency override take precedence over the automatic numbers.
 
-## One-time setup
-
-1. Merge this branch into `main`.
-2. In the repo go to **Settings → Pages**, and under **Build and deployment** set **Source** to **GitHub Actions**. The workflow in `.github/workflows/pages.yml` deploys on every push to `main`.
-   Scheduled workflows only run from the default branch, so `main` must be the default branch for the data pipeline to start.
-3. In **Settings → Actions → General → Workflow permissions**, choose **Read and write permissions** so the data workflow can commit. (The workflow also requests these permissions itself; organization policies can override them.)
-4. Create a **fine-grained personal access token** at <https://github.com/settings/personal-access-tokens/new>:
-   - Repository access: **Only select repositories** → `election26`
-   - Permissions: **Contents: Read and write** (nothing else)
-   - Set an expiration (for example, the end of November 2026)
-5. Open `https://abdonmorales.github.io/election26/admin.html`, paste the token, and sign in.
-
 ## Using the desk
 
 1. For each race pick a status: *No projection yet*, *Toss-up*, *Projection*, or *Race called*.
