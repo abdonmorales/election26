@@ -1,0 +1,26 @@
+{
+  "updatedAt": "2026-10-20T12:00:00Z",
+  "banner": {
+    "custom": "",
+    "showAuto": true
+  },
+  "races": [
+    {
+      "id": "senate",
+      "title": "U.S. Senate",
+      "candidates": { "R": "Ken Paxton", "D": "James Talarico" },
+      "projection": { "status": "pending", "winner": "", "margin": 0 },
+      "note": "",
+      "results": { "pctReporting": 0, "counties": {} }
+    },
+    {
+      "id": "governor",
+      "title": "Governor",
+      "candidates": { "R": "Greg Abbott", "D": "Gina Hinojosa" },
+      "projection": { "status": "pending", "winner": "", "margin": 0 },
+      "note": "",
+      "results": { "pctReporting": 0, "counties": {} }
+    }
+  ],
+  "feed": []
+}

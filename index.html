@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Texas Election 26</title>
+  <meta name="description" content="Live projections and county maps for the 2026 Texas U.S. Senate and Governor races.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="topbar" role="banner">
+    <div class="wrap">
+      <a class="brand" href="./">TX <span>ELECTION</span> 26</a>
+      <span class="live-pill" id="live-pill" title="Checking for new projections every 20 seconds"><span class="live-dot"></span>LIVE</span>
+      <div class="ticker" id="ticker" aria-live="polite" aria-atomic="true"></div>
+      <span class="updated num" id="updated"></span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Texas General Election 2026</h1>
+      <p>U.S. Senate and Governor · Election Day is Tuesday, November 3, 2026 · <span class="countdown" id="countdown"></span></p>
+    </section>
+
+    <section class="races" id="races" aria-label="Races">
+      <p>Loading races…</p>
+    </section>
+
+    <section class="feed" aria-labelledby="feed-h">
+      <h2 id="feed-h">Projection desk</h2>
+      <ol id="feed"></ol>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p><strong>How the map works.</strong> Before results come in, each county is shaded by a uniform-swing model: the county's 2024 presidential margin, shifted by the difference between my statewide projection and the 2024 statewide result (R+13.7). Once county returns are entered, counties are shaded by actual votes; counties still awaiting returns are shown faded.</p>
+      <p>Projections on this site are my own and are not official results. Official results: Texas Secretary of State. County boundaries: U.S. Census Bureau via us-atlas.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>

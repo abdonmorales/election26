@@ -1,0 +1,78 @@
+.admin { padding-bottom: 120px; }
+.admin .card { margin: 16px 0; }
+.admin .races { padding: 0; gap: 16px; }
+.admin .races .card { margin: 0; }
+.admin h2 { margin: 0 0 8px; font-size: 20px; }
+.admin h3 { margin: 16px 0 6px; font-size: 15px; }
+.help { color: var(--ink-2); font-size: 14px; }
+code { font-size: 13px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+
+label { display: block; font-size: 14px; font-weight: 600; color: var(--ink-2); }
+input, select, textarea {
+  display: block; width: 100%; margin-top: 4px;
+  font: inherit; font-size: 15px; color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px;
+}
+textarea { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; min-height: 110px; resize: vertical; }
+input[type="checkbox"], input[type="radio"] { display: inline; width: auto; margin: 0 6px 0 0; }
+input[type="range"] { padding: 0; border: 0; background: none; accent-color: var(--accent); }
+.grid-form { display: grid; gap: 12px; max-width: 640px; }
+.row-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.row-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.stack { margin: 10px 0; }
+.check { display: flex; align-items: center; font-weight: 500; margin: 8px 0; }
+.inline { display: flex; gap: 8px; }
+.inline input { margin: 0; }
+.actions { display: flex; align-items: center; gap: 14px; }
+
+.btn {
+  font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;
+  border: 1px solid var(--line); background: var(--surface-2); color: var(--ink);
+  border-radius: 8px; padding: 8px 14px;
+}
+.btn:hover { border-color: var(--ink-2); }
+.btn.primary { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.btn.ghost { background: none; }
+.btn.sm { padding: 4px 9px; font-size: 13px; }
+.btn:disabled { opacity: .5; cursor: progress; }
+
+.seg-ctl { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.seg-ctl label { margin: 0; }
+.seg-ctl input { position: absolute; opacity: 0; pointer-events: none; }
+.seg-ctl span {
+  display: inline-block; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line);
+  font-weight: 600; cursor: pointer; background: var(--bg);
+}
+.seg-ctl input:checked + span { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.seg-ctl input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg-ctl input[value="R"]:checked + span { background: var(--rep); border-color: var(--rep); color: #fff; }
+.seg-ctl input[value="D"]:checked + span { background: var(--dem); border-color: var(--dem); color: #fff; }
+
+.margin-ctl { display: grid; grid-template-columns: 1fr 90px; gap: 10px; align-items: center; }
+.nudges { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.preview {
+  margin-top: 12px; padding: 10px 12px; border-radius: 8px;
+  background: var(--bar-bg); color: var(--bar-ink); font-weight: 600; font-size: 14px;
+}
+.preview .tag { color: var(--accent); font-size: 11px; letter-spacing: .08em; margin-right: 6px; }
+.msg { font-size: 14px; color: var(--ink-2); }
+.msg.err { color: var(--rep); }
+.msg.ok { color: #0c8a0c; }
+.parse-out { font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+
+.feed-admin { list-style: none; padding: 0; margin: 12px 0 0; }
+.feed-admin li { display: flex; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.feed-admin time { color: var(--muted); font-size: 12px; min-width: 120px; }
+.feed-admin span { flex: 1; min-width: 0; }
+
+.publish-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  background: var(--surface); border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgba(0, 0, 0, .06);
+}
+.publish-bar .wrap { display: flex; gap: 8px; align-items: center; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap; }
+.publish-bar input { flex: 1; min-width: 160px; margin: 0; }
+
+@media (max-width: 560px) {
+  .row-3, .row-2 { grid-template-columns: 1fr; }
+  .publish-bar input { flex-basis: 100%; }
+}

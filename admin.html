@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://avatars.githubusercontent.com; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Projection Desk</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="./">TX <span>ELECTION</span> 26</a>
+      <span class="live-pill">DESK</span>
+      <div class="ticker" id="preview-ticker" aria-live="polite"></div>
+      <span class="updated" id="who"></span>
+    </div>
+  </header>
+
+  <main class="wrap admin">
+    <section class="hero">
+      <h1>Projection Desk</h1>
+      <p>Update the top bar, race projections, and county results. Publishing commits <code>data/projections.json</code> to GitHub; the public site picks it up within about a minute.</p>
+    </section>
+
+    <!-- Sign in -->
+    <section class="card" id="login-card">
+      <h2>Sign in with GitHub</h2>
+      <p class="help">Use a <strong>fine-grained personal access token</strong> limited to this one repository with <em>Contents: Read and write</em> permission. The token is checked against GitHub, is kept only in this browser tab's session storage, and is sent only to <code>api.github.com</code>.</p>
+      <form id="login-form" class="grid-form" autocomplete="off">
+        <label>Access token
+          <input type="password" id="token" required spellcheck="false" placeholder="github_pat_…" autocomplete="off">
+        </label>
+        <div class="row-3">
+          <label>Owner <input id="owner" required spellcheck="false"></label>
+          <label>Repository <input id="repo" required spellcheck="false"></label>
+          <label>Branch <input id="branch" required spellcheck="false"></label>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn primary">Sign in</button>
+          <a class="help" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">Create a token ↗</a>
+        </div>
+        <p class="msg" id="login-msg" role="alert"></p>
+      </form>
+    </section>
+
+    <!-- Editor -->
+    <div id="editor" hidden>
+      <section class="card">
+        <div class="card-head">
+          <h2>Top bar</h2>
+          <span class="chip" id="dirty-chip">Saved</span>
+        </div>
+        <label class="stack">Custom headline (optional — shown first in the top bar)
+          <input id="banner-custom" maxlength="200" placeholder="e.g. Polls close in Texas at 7 PM CT — first projections soon">
+        </label>
+        <label class="check"><input type="checkbox" id="banner-auto"> Also rotate my race projections in the top bar</label>
+      </section>
+
+      <div class="races" id="race-editors"></div>
+
+      <section class="card">
+        <h2>Projection desk feed</h2>
+        <p class="help">Every published projection change is logged here automatically. You can also post a note.</p>
+        <div class="inline">
+          <input id="feed-text" maxlength="280" placeholder="Add a note to the feed…">
+          <button class="btn" id="feed-add" type="button">Add</button>
+        </div>
+        <ol class="feed-admin" id="feed-list"></ol>
+      </section>
+
+      <div class="publish-bar">
+        <div class="wrap">
+          <input id="commit-msg" maxlength="120" placeholder="Commit message (optional)">
+          <button class="btn" id="reload" type="button">Discard &amp; reload</button>
+          <button class="btn primary" id="publish" type="button">Publish</button>
+          <button class="btn ghost" id="logout" type="button">Sign out</button>
+          <span class="msg" id="publish-msg" role="status"></span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="assets/admin.js"></script>
+</body>
+</html>
