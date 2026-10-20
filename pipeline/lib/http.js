@@ -12,12 +12,13 @@ export class HttpError extends Error {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-export async function fetchText(url, { retries = 3, timeoutMs = 20000, headers = {} } = {}) {
+export async function fetchText(url, { retries = 3, timeoutMs = 20000, headers = {}, init = {} } = {}) {
   let lastErr;
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       const res = await fetch(url, {
-        headers: { "User-Agent": USER_AGENT, Accept: "application/json, text/html;q=0.9, */*;q=0.5", ...headers },
+        ...init,
+        headers: { "User-Agent": USER_AGENT, Accept: "application/json, text/html;q=0.9, */*;q=0.5", ...init.headers, ...headers },
         signal: AbortSignal.timeout(timeoutMs),
       });
       const body = await res.text();

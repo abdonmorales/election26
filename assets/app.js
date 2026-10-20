@@ -4,16 +4,17 @@ import {
   countyBaselineMargin, statewideBaselineMargin, projectedCountyMargin, resultMargin, relativeTime,
   mergedCounties,
 } from "./common.js";
+import { renderTurnout } from "./turnout.js";
 
 const POLL_MS = 20000;
 const ELECTION_DAY = Date.parse("2026-11-03T07:00:00-06:00"); // polls open, Central Time
 
 const state = {
-  data: null, results: null, polls: null, markets: null,
+  data: null, results: null, turnout: null, benchmarks: null, polls: null, markets: null,
   baseline: null, topo: null, cards: new Map(), failures: 0, raceKey: "",
 };
 // Automated data files. A failed fetch keeps whatever we had; the page never blanks out.
-const FEEDS = { results: "data/results.json", polls: "data/polls.json", markets: "data/markets.json" };
+const FEEDS = { results: "data/results.json", turnout: "data/turnout.json", polls: "data/polls.json", markets: "data/markets.json" };
 
 /* ---------------- Data loading ---------------- */
 
@@ -397,15 +398,17 @@ function render() {
     state.raceKey = key;
   }
   for (const race of races) updateCard(race, state.cards.get(race.id));
+  renderTurnout(document.getElementById("turnout"), state);
   renderFeed();
   updateClock();
 }
 
 async function init() {
   try {
-    [state.baseline, state.topo] = await Promise.all([
+    [state.baseline, state.topo, state.benchmarks] = await Promise.all([
       fetchJSON("data/baseline-2024.json"),
       fetchJSON("data/tx-counties.topo.json"),
+      fetchJSON("data/turnout-benchmarks.json").catch(() => null),
     ]);
   } catch (err) {
     document.getElementById("races").replaceChildren(h("p", {}, "Could not load map data. Please refresh."));

@@ -18,6 +18,7 @@ import { readJSON, emptyDoc, applySourceValidated, writeIfChanged } from "./lib/
 import * as sos from "./sources/sos.js";
 import * as pollsSrc from "./sources/polls.js";
 import * as markets from "./sources/markets.js";
+import * as early from "./sources/earlyvoting.js";
 import { commitAndPush, dispatchPages } from "./lib/git.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -25,7 +26,7 @@ const DATA = path.join(ROOT, "data");
 const RACE_IDS = Object.keys(RACES);
 
 function parseArgs(argv) {
-  const args = { sources: ["results", "polls", "markets"], loop: false, until: null, interval: 75, window: null, branch: process.env.GITHUB_REF_NAME || "main" };
+  const args = { sources: ["results", "turnout", "polls", "markets"], loop: false, until: null, interval: 75, window: null, branch: process.env.GITHUB_REF_NAME || "main" };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--sources") args.sources = argv[++i].split(",").map((s) => s.trim()).filter(Boolean);
@@ -55,6 +56,31 @@ async function updateResults(now, ctx) {
   if (outcome.note) log(`results: ${outcome.note}`);
   if (!outcome.ok) log(`results: FAILED — ${outcome.error}`);
   const doc = applySourceValidated(prev, "sos", sos.META, outcome, now, schema, { sanity: sos.sanity });
+  const written = [writeIfChanged(file, doc, schema) ? file : null];
+
+  // Election-day turnout comes from the same County.json, so record it here too.
+  const tFile = path.join(DATA, "turnout.json");
+  const tSchema = loadSchema("turnout");
+  const tPrev = readJSON(tFile) || emptyDoc(["statewide"]);
+  const tOutcome = outcome.ok
+    ? { ok: true, races: { statewide: outcome.turnout || sos.emptyTurnout(outcome.races?.senate?.election ?? null) } }
+    : outcome;
+  const tDoc = applySourceValidated(tPrev, "sos", sos.META, tOutcome, now, tSchema);
+  written.push(writeIfChanged(tFile, tDoc, tSchema) ? tFile : null);
+  return written;
+}
+
+async function updateTurnout(now, ctx) {
+  const file = path.join(DATA, "turnout.json");
+  const schema = loadSchema("turnout");
+  const prev = readJSON(file) || emptyDoc(["statewide"]);
+  const baseline = readJSON(path.join(DATA, "baseline-2024.json"));
+  ctx.evClient ??= new early.EarlyVotingClient({ log });
+  const outcome = await early.fetchEarlyVoting({ client: ctx.evClient, year: ELECTION.year, baseline, prev: prev.races.statewide?.earlyvoting });
+  if (outcome.note) log(`turnout: ${outcome.note}`);
+  if (!outcome.ok) log(`turnout: FAILED — ${outcome.error}`);
+  else if (outcome.races.statewide.available) log(`turnout: early votes ${outcome.races.statewide.total} (${outcome.races.statewide.turnoutPct}%) as of ${outcome.races.statewide.asOf}`);
+  const doc = applySourceValidated(prev, "earlyvoting", early.META, outcome, now, schema, { sanity: early.sanity });
   return writeIfChanged(file, doc, schema) ? file : null;
 }
 
@@ -85,7 +111,7 @@ async function updateMarkets(now) {
   return writeIfChanged(file, doc, schema) ? file : null;
 }
 
-const UPDATERS = { results: updateResults, polls: updatePolls, markets: updateMarkets };
+const UPDATERS = { results: updateResults, turnout: updateTurnout, polls: updatePolls, markets: updateMarkets };
 
 async function runOnce(sources, ctx) {
   const now = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
@@ -93,8 +119,8 @@ async function runOnce(sources, ctx) {
   for (const s of sources) {
     if (!UPDATERS[s]) throw new Error(`Unknown source ${s}`);
     try {
-      const f = await UPDATERS[s](now, ctx);
-      if (f) changed.push(path.relative(ROOT, f));
+      const files = [await UPDATERS[s](now, ctx)].flat().filter(Boolean);
+      for (const f of files) if (!changed.includes(path.relative(ROOT, f))) changed.push(path.relative(ROOT, f));
     } catch (err) {
       // Validation refusals and unexpected bugs: never write, keep the last good file.
       log(`${s}: not written — ${err.message}`);
@@ -127,12 +153,12 @@ async function main() {
       return;
     }
 
-    // Election-night loop: results every pass, markets every ~5 passes, polls every ~40.
+    // Election-night loop: results every pass, markets every ~5 passes, polls and early-vote turnout every ~40.
     const until = args.until ? Date.parse(args.until) : Date.parse(ELECTION.nightEnd);
     const hardStop = Date.now() + 5.75 * 3600 * 1000; // stay under the 6-hour job limit
     let pass = 0, anyChange = false;
     while (Date.now() < Math.min(until, hardStop)) {
-      const sources = args.sources.filter((s) => s === "results" || (s === "markets" && pass % 5 === 0) || (s === "polls" && pass % 40 === 0));
+      const sources = args.sources.filter((s) => s === "results" || (s === "markets" && pass % 5 === 0) || ((s === "polls" || s === "turnout") && pass % 40 === 0));
       const changed = await runOnce(sources, ctx);
       if (changed.length) {
         const pushed = commitAndPush(changed, `data: update ${changed.map((f) => path.basename(f, ".json")).join(", ")} [election night]`, args.branch);
@@ -149,6 +175,7 @@ async function main() {
     setOutput("changed", anyChange ? "true" : "false");
   } finally {
     await ctx.sosClient?.close();
+    await ctx.evClient?.close();
   }
 }
 

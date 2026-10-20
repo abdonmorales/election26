@@ -80,3 +80,13 @@ test("sanity refuses shrinking or vanished returns", () => {
   assert.match(sanity(prev, { ...prev, counties: {} }), /county count/);
   assert.equal(sanity(undefined, prev), null);
 });
+
+test("parseTurnout totals registered voters and ballots cast", async () => {
+  const { parseTurnout } = await import("../pipeline/sources/sos.js");
+  const t = parseTurnout({ countyData, home, election, baseline });
+  assert.equal(t.available, true);
+  assert.deepEqual(t.counties["48201"], [2693055, 1557484]);
+  assert.equal(t.registeredVoters, Object.values(countyData).reduce((a, c) => a + c.Summary.RV, 0));
+  assert.equal(t.ballotsCast, Object.values(countyData).reduce((a, c) => a + c.Summary.VC, 0));
+  assert.equal(parseTurnout({ countyData: {}, home, election, baseline }), null);
+});

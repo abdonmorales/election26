@@ -64,7 +64,7 @@ test("writeIfChanged writes once and refuses invalid documents", () => {
 });
 
 test("committed data files match their schemas", () => {
-  for (const name of ["results", "polls", "markets"]) {
+  for (const name of ["results", "turnout", "polls", "markets", "turnout-benchmarks"]) {
     assert.deepEqual(validate(loadSchema(name), dataJSON(`${name}.json`)), [], name);
   }
 });

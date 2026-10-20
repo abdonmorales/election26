@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-20T07:26:44Z",
+  "sources": {
+    "sos": {
+      "name": "Texas Secretary of State",
+      "url": "https://results.texas-election.com/races",
+      "ok": true,
+      "updatedAt": "2026-10-20T07:26:44Z",
+      "error": null,
+      "errorSince": null
+    },
+    "earlyvoting": {
+      "name": "Texas SOS early-voting turnout",
+      "url": "https://earlyvoting.texas-election.com/Elections/getElectionDetails.do",
+      "ok": true,
+      "updatedAt": "2026-10-20T07:26:44Z",
+      "error": null,
+      "errorSince": null
+    }
+  },
+  "races": {
+    "statewide": {
+      "sos": {
+        "available": false,
+        "election": null,
+        "registeredVoters": 0,
+        "ballotsCast": 0,
+        "turnoutPct": 0,
+        "sosTimestamp": null,
+        "counties": {}
+      },
+      "earlyvoting": {
+        "available": false,
+        "election": null,
+        "electionDate": null,
+        "asOf": null,
+        "registeredVoters": 0,
+        "inPerson": 0,
+        "mail": 0,
+        "total": 0,
+        "turnoutPct": 0,
+        "history": [],
+        "counties": {}
+      }
+    }
+  }
+}

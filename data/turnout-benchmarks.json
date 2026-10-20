@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 1,
+  "source": "https://earlyvoting.texas-election.com and https://results.texas-election.com",
+  "elections": [
+    {
+      "year": 2022,
+      "id": "47009",
+      "name": "2022 NOVEMBER 8TH GENERAL ELECTION",
+      "electionDate": "2022-11-08",
+      "final": {
+        "registeredVoters": 17672143,
+        "ballotsCast": 8102908,
+        "turnoutPct": 45.9
+      },
+      "history": [
+        {
+          "date": "2022-10-02",
+          "daysBefore": 37,
+          "total": 1499,
+          "pct": 0
+        },
+        {
+          "date": "2022-10-03",
+          "daysBefore": 36,
+          "total": 3751,
+          "pct": 0
+        },
+        {
+          "date": "2022-10-04",
+          "daysBefore": 35,
+          "total": 4846,
+          "pct": 0
+        },
+        {
+          "date": "2022-10-05",
+          "daysBefore": 34,
+          "total": 7948,
+          "pct": 0
+        },
+        {
+          "date": "2022-10-06",
+          "daysBefore": 33,
+          "total": 10573,
+          "pct": 0.1
+        },
+        {
+          "date": "2022-10-07",
+          "daysBefore": 32,
+          "total": 14043,
+          "pct": 0.1
+        },
+        {
+          "date": "2022-10-08",
+          "daysBefore": 31,
+          "total": 14192,
+          "pct": 0.1
+        },
+        {
+          "date": "2022-10-09",
+          "daysBefore": 30,
+          "total": 14194,
+          "pct": 0.1
+        },
+        {
+          "date": "2022-10-10",
+          "daysBefore": 29,
+          "total": 15428,
+          "pct": 0.1
+        },
+        {
+          "date": "2022-10-11",
+          "daysBefore": 28,
+          "total": 24452,
+          "pct": 0.1
+        },
+        {
+          "date": "2022-10-12",
+          "daysBefore": 27,
+          "total": 31086,
+          "pct": 0.2
+        },
+        {
+          "date": "2022-10-13",
+          "daysBefore": 26,
+          "total": 44243,
+          "pct": 0.3
+        },
+        {
+          "date": "2022-10-14",
+          "daysBefore": 25,
+          "total": 57716,
+          "pct": 0.3
+        },
+        {
+          "date": "2022-10-15",
+          "daysBefore": 24,
+          "total": 59717,
+          "pct": 0.3
+        },
+        {
+          "date": "2022-10-16",
+          "daysBefore": 23,
+          "total": 60143,
+          "pct": 0.3
+        },
+        {
+          "date": "2022-10-17",
+          "daysBefore": 22,
+          "total": 78190,
+          "pct": 0.4
+        },
+        {
+          "date": "2022-10-18",
+          "daysBefore": 21,
+          "total": 89992,
+          "pct": 0.5
+        },
+        {
+          "date": "2022-10-19",
+          "daysBefore": 20,
+          "total": 103445,
+          "pct": 0.6
+        },
+        {
+          "date": "2022-10-20",
+          "daysBefore": 19,
+          "total": 120675,
+          "pct": 0.7
+        },
+        {
+          "date": "2022-10-21",
+          "daysBefore": 18,
+          "total": 135408,
+          "pct": 0.8
+        },
+        {
+          "date": "2022-10-22",
+          "daysBefore": 17,
+          "total": 153841,
+          "pct": 0.9
+        },
+        {
+          "date": "2022-10-23",
+          "daysBefore": 16,
+          "total": 154206,
+          "pct": 0.9
+        },
+        {
+          "date": "2022-10-24",
+          "daysBefore": 15,
+          "total": 647957,
+          "pct": 3.7
+        },
+        {
+          "date": "2022-10-25",
+          "daysBefore": 14,
+          "total": 1147219,
+          "pct": 6.5
+        },
+        {
+          "date": "2022-10-26",
+          "daysBefore": 13,
+          "total": 1617402,
+          "pct": 9.2
+        },
+        {
+          "date": "2022-10-27",
+          "daysBefore": 12,
+          "total": 2064995,
+          "pct": 11.7
+        },
+        {
+          "date": "2022-10-28",
+          "daysBefore": 11,
+          "total": 2515156,
+          "pct": 14.2
+        },
+        {
+          "date": "2022-10-29",
+          "daysBefore": 10,
+          "total": 2845953,
+          "pct": 16.1
+        },
+        {
+          "date": "2022-10-30",
+          "daysBefore": 9,
+          "total": 2992421,
+          "pct": 16.9
+        },
+        {
+          "date": "2022-10-31",
+          "daysBefore": 8,
+          "total": 3407723,
+          "pct": 19.3
+        },
+        {
+          "date": "2022-11-01",
+          "daysBefore": 7,
+          "total": 3803294,
+          "pct": 21.5
+        },
+        {
+          "date": "2022-11-02",
+          "daysBefore": 6,
+          "total": 4242737,
+          "pct": 24
+        },
+        {
+          "date": "2022-11-03",
+          "daysBefore": 5,
+          "total": 4762628,
+          "pct": 26.9
+        },
+        {
+          "date": "2022-11-04",
+          "daysBefore": 4,
+          "total": 5497027,
+          "pct": 31.1
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "id": "49664",
+      "name": "2024 NOVEMBER 5TH GENERAL ELECTION",
+      "electionDate": "2024-11-05",
+      "final": {
+        "registeredVoters": 18623931,
+        "ballotsCast": 11388674,
+        "turnoutPct": 61.2
+      },
+      "history": [
+        {
+          "date": "2024-09-29",
+          "daysBefore": 37,
+          "total": 1596,
+          "pct": 0
+        },
+        {
+          "date": "2024-09-30",
+          "daysBefore": 36,
+          "total": 4215,
+          "pct": 0
+        },
+        {
+          "date": "2024-10-01",
+          "daysBefore": 35,
+          "total": 5727,
+          "pct": 0
+        },
+        {
+          "date": "2024-10-02",
+          "daysBefore": 34,
+          "total": 9245,
+          "pct": 0
+        },
+        {
+          "date": "2024-10-03",
+          "daysBefore": 33,
+          "total": 13159,
+          "pct": 0.1
+        },
+        {
+          "date": "2024-10-04",
+          "daysBefore": 32,
+          "total": 18016,
+          "pct": 0.1
+        },
+        {
+          "date": "2024-10-05",
+          "daysBefore": 31,
+          "total": 19432,
+          "pct": 0.1
+        },
+        {
+          "date": "2024-10-06",
+          "daysBefore": 30,
+          "total": 19544,
+          "pct": 0.1
+        },
+        {
+          "date": "2024-10-07",
+          "daysBefore": 29,
+          "total": 28932,
+          "pct": 0.2
+        },
+        {
+          "date": "2024-10-08",
+          "daysBefore": 28,
+          "total": 39157,
+          "pct": 0.2
+        },
+        {
+          "date": "2024-10-09",
+          "daysBefore": 27,
+          "total": 47003,
+          "pct": 0.3
+        },
+        {
+          "date": "2024-10-10",
+          "daysBefore": 26,
+          "total": 61940,
+          "pct": 0.3
+        },
+        {
+          "date": "2024-10-11",
+          "daysBefore": 25,
+          "total": 73909,
+          "pct": 0.4
+        },
+        {
+          "date": "2024-10-12",
+          "daysBefore": 24,
+          "total": 78915,
+          "pct": 0.4
+        },
+        {
+          "date": "2024-10-13",
+          "daysBefore": 23,
+          "total": 79614,
+          "pct": 0.4
+        },
+        {
+          "date": "2024-10-14",
+          "daysBefore": 22,
+          "total": 86762,
+          "pct": 0.5
+        },
+        {
+          "date": "2024-10-15",
+          "daysBefore": 21,
+          "total": 102549,
+          "pct": 0.6
+        },
+        {
+          "date": "2024-10-16",
+          "daysBefore": 20,
+          "total": 119544,
+          "pct": 0.6
+        },
+        {
+          "date": "2024-10-17",
+          "daysBefore": 19,
+          "total": 136201,
+          "pct": 0.7
+        },
+        {
+          "date": "2024-10-18",
+          "daysBefore": 18,
+          "total": 152327,
+          "pct": 0.8
+        },
+        {
+          "date": "2024-10-19",
+          "daysBefore": 17,
+          "total": 160730,
+          "pct": 0.9
+        },
+        {
+          "date": "2024-10-20",
+          "daysBefore": 16,
+          "total": 161982,
+          "pct": 0.9
+        },
+        {
+          "date": "2024-10-21",
+          "daysBefore": 15,
+          "total": 1112044,
+          "pct": 6
+        },
+        {
+          "date": "2024-10-22",
+          "daysBefore": 14,
+          "total": 1996043,
+          "pct": 10.7
+        },
+        {
+          "date": "2024-10-23",
+          "daysBefore": 13,
+          "total": 2850176,
+          "pct": 15.3
+        },
+        {
+          "date": "2024-10-24",
+          "daysBefore": 12,
+          "total": 3644731,
+          "pct": 19.6
+        },
+        {
+          "date": "2024-10-25",
+          "daysBefore": 11,
+          "total": 4507733,
+          "pct": 24.2
+        },
+        {
+          "date": "2024-10-26",
+          "daysBefore": 10,
+          "total": 5156750,
+          "pct": 27.7
+        },
+        {
+          "date": "2024-10-27",
+          "daysBefore": 9,
+          "total": 5479281,
+          "pct": 29.4
+        },
+        {
+          "date": "2024-10-28",
+          "daysBefore": 8,
+          "total": 6228042,
+          "pct": 33.4
+        },
+        {
+          "date": "2024-10-29",
+          "daysBefore": 7,
+          "total": 6912655,
+          "pct": 37.1
+        },
+        {
+          "date": "2024-10-30",
+          "daysBefore": 6,
+          "total": 7552471,
+          "pct": 40.6
+        },
+        {
+          "date": "2024-10-31",
+          "daysBefore": 5,
+          "total": 8158109,
+          "pct": 43.8
+        },
+        {
+          "date": "2024-11-01",
+          "daysBefore": 4,
+          "total": 9058436,
+          "pct": 48.6
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "$id": "turnout.schema.json",
+  "title": "Early-vote and election-day turnout",
+  "type": "object",
+  "required": ["schemaVersion", "updatedAt", "sources", "races"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "updatedAt": { "type": ["string", "null"], "format": "date-time" },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "earlyvoting": { "$ref": "#/$defs/sourceStatus" },
+        "sos": { "$ref": "#/$defs/sourceStatus" }
+      }
+    },
+    "races": {
+      "description": "Turnout is statewide, so the only key is \"statewide\" (the envelope is shared with the per-race files).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statewide"],
+      "properties": {
+        "statewide": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "earlyvoting": { "$ref": "#/$defs/early" },
+            "sos": { "$ref": "#/$defs/electionDay" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "count": { "type": "integer", "minimum": 0 },
+    "pct": { "type": "number", "minimum": 0, "maximum": 100 },
+    "election": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "object", "required": ["id", "name"], "additionalProperties": false,
+          "properties": { "id": { "type": "string", "pattern": "^\\d+$" }, "name": { "type": "string" } } }
+      ]
+    },
+    "early": {
+      "type": "object",
+      "required": ["available", "election", "electionDate", "asOf", "registeredVoters", "inPerson", "mail", "total", "turnoutPct", "history", "counties"],
+      "additionalProperties": false,
+      "properties": {
+        "available": { "type": "boolean" },
+        "election": { "$ref": "#/$defs/election" },
+        "electionDate": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/date" }] },
+        "asOf": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/date" }] },
+        "registeredVoters": { "$ref": "#/$defs/count" },
+        "inPerson": { "$ref": "#/$defs/count" },
+        "mail": { "$ref": "#/$defs/count" },
+        "total": { "$ref": "#/$defs/count" },
+        "turnoutPct": { "$ref": "#/$defs/pct" },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["date", "inPersonDay", "inPerson", "mail", "total", "pct"],
+            "additionalProperties": false,
+            "properties": {
+              "date": { "$ref": "#/$defs/date" },
+              "inPersonDay": { "$ref": "#/$defs/count" },
+              "inPerson": { "$ref": "#/$defs/count" },
+              "mail": { "$ref": "#/$defs/count" },
+              "total": { "$ref": "#/$defs/count" },
+              "pct": { "$ref": "#/$defs/pct" }
+            }
+          }
+        },
+        "counties": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^48\\d{3}$": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "$ref": "#/$defs/count" } }
+          }
+        }
+      }
+    },
+    "electionDay": {
+      "type": "object",
+      "required": ["available", "election", "registeredVoters", "ballotsCast", "turnoutPct", "sosTimestamp", "counties"],
+      "additionalProperties": false,
+      "properties": {
+        "available": { "type": "boolean" },
+        "election": { "$ref": "#/$defs/election" },
+        "registeredVoters": { "$ref": "#/$defs/count" },
+        "ballotsCast": { "$ref": "#/$defs/count" },
+        "turnoutPct": { "$ref": "#/$defs/pct" },
+        "sosTimestamp": { "type": ["string", "null"] },
+        "counties": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^48\\d{3}$": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/count" } }
+          }
+        }
+      }
+    }
+  }
+}

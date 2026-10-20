@@ -94,7 +94,7 @@ jobs:
       - name: Commit changed data
         if: steps.run.outputs.changed == 'true'
         run: |
-          git add data/results.json data/polls.json data/markets.json
+          git add data/results.json data/turnout.json data/polls.json data/markets.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "data: update $(git diff --cached --name-only | xargs -n1 basename | sed 's/.json//' | paste -sd, -)"
           for i in 1 2 3 4; do

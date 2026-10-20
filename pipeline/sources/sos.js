@@ -6,15 +6,12 @@
 //   /static/data/election/<id>/Version.json           -> { ___versionNo }            (results snapshot version)
 //   /static/data/election/<id>/<ev>/Home.json         -> statewide precinct/county reporting counts
 //   /static/data/election/<id>/<ev>/County.json       -> every county (keyed by FIPS) with every race's candidates
-// The site sits behind a Cloudflare bot check, so plain requests can get a 403 challenge page. When
-// that happens we open the page in headless Chromium (Playwright) and fetch the same JSON from
-// inside the page, exactly as the site itself does.
+// The site sits behind a Cloudflare bot check; see lib/cfsession.js for how requests get through.
 
-import { fetchJSON, HttpError } from "../lib/http.js";
+import { CloudflareSession } from "../lib/cfsession.js";
 
 export const SOS_ORIGIN = "https://results.texas-election.com";
 export const SOS_PAGE = `${SOS_ORIGIN}/races`;
-const DATA = `${SOS_ORIGIN}/static/data`;
 
 export const META = { name: "Texas Secretary of State", url: SOS_PAGE };
 
@@ -117,6 +114,40 @@ function titleCase(s) {
   return String(s || "").toLowerCase().replace(/(^|[\s\-'./])([a-z])/g, (_, p, c) => p + c.toUpperCase());
 }
 
+/**
+ * Election-night turnout from the same County.json: each county's Summary carries registered
+ * voters (RV) and ballots cast (VC). Returns null when the feed has no ballots yet.
+ */
+export function parseTurnout({ countyData, home, election, baseline }) {
+  const nameIndex = buildNameIndex(baseline);
+  const counties = {};
+  let registered = 0, cast = 0;
+  for (const [key, entry] of Object.entries(countyData || {})) {
+    const fips = countyFips(key, entry, baseline, nameIndex);
+    const sum = entry?.Summary;
+    if (!fips || !sum) continue;
+    const rv = Math.max(0, Math.round(Number(sum.RV) || 0));
+    const vc = Math.max(0, Math.round(Number(sum.VC) || 0));
+    counties[fips] = [rv, vc];
+    registered += rv;
+    cast += vc;
+  }
+  if (!cast) return null;
+  return {
+    available: true,
+    election,
+    registeredVoters: registered,
+    ballotsCast: cast,
+    turnoutPct: pct1(cast, registered),
+    sosTimestamp: home?.LastUpdatedTime || null,
+    counties: Object.fromEntries(Object.entries(counties).sort(([a], [b]) => a.localeCompare(b))),
+  };
+}
+
+export function emptyTurnout(election = null) {
+  return { available: false, election, registeredVoters: 0, ballotsCast: 0, turnoutPct: 0, sosTimestamp: null, counties: {} };
+}
+
 /** Sanity check: refuse payloads that would wipe out or sharply shrink data we already have. */
 export function sanity(prev, next) {
   if (!prev?.available) return null;
@@ -132,59 +163,12 @@ export function sanity(prev, next) {
 
 /* ---------------- Fetching ---------------- */
 
-const isChallenge = (err) => err instanceof HttpError && (err.status === 403 || err.status === 503 || /just a moment|cf-chl|challenge/i.test(err.body || ""));
-
 export class SosClient {
   constructor({ log = console.log } = {}) {
-    this.log = log;
-    this.browser = null;
-    this.page = null;
+    this.session = new CloudflareSession({ origin: SOS_ORIGIN, landing: SOS_PAGE, log });
   }
-
-  async get(path) {
-    if (!this.page) {
-      try {
-        return await fetchJSON(`${DATA}/${path}`, { retries: 1 });
-      } catch (err) {
-        if (!isChallenge(err)) throw err;
-        this.log(`SOS: plain request blocked (${err.message}); switching to headless browser`);
-        await this.openBrowser();
-      }
-    }
-    const res = await this.page.evaluate(async (url) => {
-      const r = await fetch(url, { cache: "no-store" });
-      return { status: r.status, text: await r.text() };
-    }, `${DATA}/${path}`);
-    if (res.status !== 200) {
-      // Clearance can expire during a long election night; start over on the next call.
-      if (res.status === 403 || res.status === 503) await this.close();
-      throw new HttpError(`HTTP ${res.status} for ${path} (browser)`, res.status);
-    }
-    try { return JSON.parse(res.text); } catch { throw new Error(`Invalid JSON for ${path} (browser)`); }
-  }
-
-  async openBrowser() {
-    let playwright;
-    try {
-      playwright = await import("playwright");
-    } catch {
-      throw new Error("SOS site requires a browser (Cloudflare check) but Playwright is not installed");
-    }
-    const launch = { args: ["--disable-blink-features=AutomationControlled"] };
-    if (process.env.HTTPS_PROXY) launch.proxy = { server: process.env.HTTPS_PROXY };
-    this.browser = await playwright.chromium.launch(launch);
-    const ctx = await this.browser.newContext({ ignoreHTTPSErrors: !!process.env.HTTPS_PROXY });
-    this.page = await ctx.newPage();
-    await this.page.goto(SOS_PAGE, { waitUntil: "domcontentloaded", timeout: 60000 });
-    // Wait until Cloudflare has let us through and the app has loaded its own data.
-    await this.page.waitForFunction(() => !/just a moment/i.test(document.title), null, { timeout: 60000 });
-    await this.page.waitForLoadState("networkidle", { timeout: 30000 }).catch(() => {});
-  }
-
-  async close() {
-    await this.browser?.close().catch(() => {});
-    this.browser = this.page = null;
-  }
+  get(path) { return this.session.json(`/static/data/${path}`); }
+  close() { return this.session.close(); }
 }
 
 /** Fetch and parse. Returns an outcome for store.applySource. */
@@ -209,7 +193,7 @@ export async function fetchSos({ client, year, baseline, raceDefs }) {
     const { races } = parseResults({ countyData, home, election, baseline, raceDefs });
     const missing = Object.entries(races).filter(([, r]) => !r.available).map(([id]) => id);
     if (missing.length) return { ok: false, error: `Office not found in ${election.name}: ${missing.join(", ")}` };
-    return { ok: true, races };
+    return { ok: true, races, turnout: parseTurnout({ countyData, home, election, baseline }) };
   } catch (err) {
     return { ok: false, error: err.message };
   }
