@@ -8,12 +8,24 @@
   <title>Texas Election 26</title>
   <meta name="description" content="Live projections and county maps for the 2026 Texas U.S. Senate and Governor races.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icon-180.png" type="image/png" sizes="180x180">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <meta name="theme-color" content="#121826">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Texas Election ’26 — Senate &amp; Governor">
+  <meta property="og:description" content="Live projections, county maps, polls, markets and official returns for the 2026 Texas Senate and Governor races.">
+  <meta property="og:url" content="https://abdonmorales.github.io/election26/">
+  <meta property="og:image" content="https://abdonmorales.github.io/election26/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Election ’26 flag logo beside the words Texas Senate and Governor">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   <header class="topbar" role="banner">
     <div class="wrap">
-      <a class="brand" href="./">TX <span>ELECTION</span> 26</a>
+      <a class="brand" href="./" aria-label="Texas Election ’26 home"><img class="brand-logo" src="assets/logo.svg" alt="" width="51" height="32"><span class="brand-tx">TEXAS</span></a>
       <span class="live-pill" id="live-pill" title="Checking for new projections every 20 seconds"><span class="live-dot"></span>LIVE</span>
       <div class="ticker" id="ticker" aria-live="polite" aria-atomic="true"></div>
       <span class="updated num" id="updated"></span>
@@ -22,8 +34,11 @@
 
   <main class="wrap">
     <section class="hero">
+      <img class="hero-logo" src="assets/logo.svg" alt="Election ’26" width="160" height="101">
+      <div>
       <h1>Texas General Election 2026</h1>
       <p>U.S. Senate and Governor · Election Day is Tuesday, November 3, 2026 · <span class="countdown" id="countdown"></span></p>
+      </div>
     </section>
 
     <section class="races" id="races" aria-label="Races">

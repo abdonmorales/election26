@@ -1,5 +1,7 @@
 # Texas Election 26
 
+<img src="assets/logo.svg" alt="Election ’26 logo" width="240">
+
 A live projection site for the 2026 Texas **U.S. Senate** (Talarico vs. Paxton) and **Governor** (Hinojosa vs. Abbott) races, hosted on GitHub Pages.
 
 - **`index.html`** — public site: a top bar that rotates my projections ("I project James Talarico to win by +8 D"), a race card and county map for each race, and a projection feed. It re-checks for updates every 20 seconds.
@@ -104,6 +106,14 @@ Look at the latest **Update election data** run in the Actions tab. Each source 
 python3 -m http.server 8000
 # open http://localhost:8000/ and http://localhost:8000/admin.html
 ```
+
+## Branding
+
+The logo is the Election ’26 flag from `assets/brand/election26-logo.odg` (the original OpenOffice drawing). It was rebuilt as a vector file using the drawing's exact shapes, colors (#2a6099 blue, #ff0000 red, white) and star outlines, with the text converted to outlines so it looks the same in every browser. Files:
+
+- `assets/logo.svg`: the full logo (site header, hero, README)
+- `assets/favicon.svg`, `assets/icon-180.png`, `assets/icon-512.png`: browser tab and home-screen icons (the canton with "’26" and stripes, since the full flag is illegible at 16 px)
+- `assets/og-image.png`: 1200×630 preview card for links shared on social media and in messages
 
 ## Data sources
 
