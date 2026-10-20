@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-20T06:59:09Z",
+  "updatedAt": "2026-10-20T14:21:28Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-20T06:59:09Z",
+      "updatedAt": "2026-10-20T14:21:28Z",
       "error": null,
       "errorSince": null
     },
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-20T06:59:09Z",
+      "updatedAt": "2026-10-20T14:21:28Z",
       "error": null,
       "errorSince": null
     }
@@ -25,19 +25,19 @@
         "market": "SENATETX-26",
         "title": "Texas Senate winner?",
         "url": "https://kalshi.com/markets/senatetx",
-        "probD": 61,
-        "probR": 39,
+        "probD": 62,
+        "probR": 38,
         "markets": {
           "R": {
             "ticker": "SENATETX-26-R",
             "name": "Ken Paxton",
-            "price": 0.39,
+            "price": 0.38,
             "basis": "mid"
           },
           "D": {
             "ticker": "SENATETX-26-D",
             "name": "James Talarico",
-            "price": 0.62,
+            "price": 0.63,
             "basis": "mid"
           }
         }
@@ -58,7 +58,7 @@
           "R": {
             "id": "630964",
             "name": "Ken Paxton (R)",
-            "price": 0.39,
+            "price": 0.38,
             "basis": "mid"
           }
         }
@@ -75,7 +75,7 @@
           "D": {
             "ticker": "GOVPARTYTX-26-D",
             "name": "Gina Hinojosa",
-            "price": 0.25,
+            "price": 0.26,
             "basis": "mid"
           },
           "R": {
