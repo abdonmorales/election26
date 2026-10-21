@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-21T11:57:18Z",
+  "updatedAt": "2026-10-21T17:17:11Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-21T11:57:18Z",
+      "updatedAt": "2026-10-21T17:17:11Z",
       "error": null,
       "errorSince": null
     },
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-21T11:57:18Z",
+      "updatedAt": "2026-10-21T17:17:11Z",
       "error": null,
       "errorSince": null
     }
@@ -25,19 +25,19 @@
         "market": "SENATETX-26",
         "title": "Texas Senate winner?",
         "url": "https://kalshi.com/markets/senatetx",
-        "probD": 63,
-        "probR": 37,
+        "probD": 64,
+        "probR": 36,
         "markets": {
           "R": {
             "ticker": "SENATETX-26-R",
             "name": "Ken Paxton",
-            "price": 0.37,
+            "price": 0.36,
             "basis": "mid"
           },
           "D": {
             "ticker": "SENATETX-26-D",
             "name": "James Talarico",
-            "price": 0.64,
+            "price": 0.65,
             "basis": "mid"
           }
         }
@@ -69,19 +69,19 @@
         "market": "GOVPARTYTX-26",
         "title": "Texas Governor winner?",
         "url": "https://kalshi.com/markets/govpartytx",
-        "probD": 28,
-        "probR": 72,
+        "probD": 30,
+        "probR": 70,
         "markets": {
           "D": {
             "ticker": "GOVPARTYTX-26-D",
             "name": "Gina Hinojosa",
-            "price": 0.28,
+            "price": 0.3,
             "basis": "mid"
           },
           "R": {
             "ticker": "GOVPARTYTX-26-R",
             "name": "Greg Abbott",
-            "price": 0.73,
+            "price": 0.71,
             "basis": "mid"
           }
         }
@@ -90,19 +90,19 @@
         "market": "texas-governor-winner-2026",
         "title": "Texas Governor Election Winner",
         "url": "https://polymarket.com/event/texas-governor-winner-2026",
-        "probD": 27,
-        "probR": 73,
+        "probD": 31,
+        "probR": 69,
         "markets": {
           "D": {
             "id": "629690",
             "name": "Gina Hinojosa (D)",
-            "price": 0.27,
+            "price": 0.31,
             "basis": "mid"
           },
           "R": {
             "id": "629691",
             "name": "Greg Abbott (R)",
-            "price": 0.73,
+            "price": 0.69,
             "basis": "mid"
           }
         }
