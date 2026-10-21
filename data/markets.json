@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-20T23:56:39Z",
+  "updatedAt": "2026-10-21T04:56:23Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-20T23:56:39Z",
+      "updatedAt": "2026-10-21T04:56:23Z",
       "error": null,
       "errorSince": null
     },
@@ -75,7 +75,7 @@
           "D": {
             "ticker": "GOVPARTYTX-26-D",
             "name": "Gina Hinojosa",
-            "price": 0.3,
+            "price": 0.29,
             "basis": "mid"
           },
           "R": {
