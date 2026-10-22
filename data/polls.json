@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-22T04:56:14Z",
+  "updatedAt": "2026-10-22T11:59:32Z",
   "sources": {
     "wikipedia": {
       "name": "Wikipedia polling tables",
       "url": "https://en.wikipedia.org",
       "ok": true,
-      "updatedAt": "2026-10-22T04:56:14Z",
+      "updatedAt": "2026-10-22T11:59:32Z",
       "error": null,
       "errorSince": null
     }
@@ -19,8 +19,32 @@
           "D": "James Talarico",
           "R": "Ken Paxton"
         },
-        "totalPollsOnPage": 65,
+        "totalPollsOnPage": 68,
         "polls": [
+          {
+            "pollster": "Emerson College",
+            "start": "2026-10-17",
+            "end": "2026-10-19",
+            "n": 1000,
+            "population": "LV",
+            "D": 49,
+            "R": 48,
+            "margin": -1,
+            "url": "https://en.wikipedia.org/wiki/Emerson_College",
+            "trustedAs": "Emerson College"
+          },
+          {
+            "pollster": "Emerson College",
+            "start": "2026-10-17",
+            "end": "2026-10-19",
+            "n": 1000,
+            "population": "LV",
+            "D": 48,
+            "R": 46,
+            "margin": -2,
+            "url": "https://en.wikipedia.org/wiki/Emerson_College",
+            "trustedAs": "Emerson College"
+          },
           {
             "pollster": "University of Houston",
             "start": "2026-10-10",
@@ -359,54 +383,54 @@
           }
         ],
         "average": {
-          "margin": -2.5,
-          "D": 48,
-          "R": 45.5,
+          "margin": -2.2,
+          "D": 48.3,
+          "R": 46.1,
           "pollCount": 7,
-          "asOf": "2026-10-14",
-          "latestPoll": "2026-10-14",
+          "asOf": "2026-10-19",
+          "latestPoll": "2026-10-19",
           "contributions": [
             {
               "pollster": "University of Houston",
               "end": "2026-10-14",
-              "weight": 1.581,
+              "weight": 1.234,
               "adjustedMargin": -2
+            },
+            {
+              "pollster": "Emerson College",
+              "end": "2026-10-19",
+              "weight": 1.118,
+              "adjustedMargin": -1
             },
             {
               "pollster": "Marist University",
               "end": "2026-10-11",
-              "weight": 1.054,
+              "weight": 0.823,
               "adjustedMargin": -2
             },
             {
               "pollster": "University of Texas/Texas Politics Project",
               "end": "2026-10-05",
-              "weight": 0.664,
+              "weight": 0.519,
               "adjustedMargin": -3
             },
             {
               "pollster": "ReconMR/Siena University",
               "end": "2026-10-08",
-              "weight": 0.653,
+              "weight": 0.509,
               "adjustedMargin": -4
             },
             {
               "pollster": "Texas Southern University",
               "end": "2026-09-19",
-              "weight": 0.435,
+              "weight": 0.34,
               "adjustedMargin": -1
             },
             {
               "pollster": "Texas Public Opinion Research (D)",
               "end": "2026-09-22",
-              "weight": 0.378,
+              "weight": 0.295,
               "adjustedMargin": -5
-            },
-            {
-              "pollster": "Emerson College",
-              "end": "2026-09-14",
-              "weight": 0.253,
-              "adjustedMargin": -1
             }
           ]
         }
@@ -419,8 +443,20 @@
           "D": "Gina Hinojosa",
           "R": "Greg Abbott"
         },
-        "totalPollsOnPage": 58,
+        "totalPollsOnPage": 59,
         "polls": [
+          {
+            "pollster": "Emerson College",
+            "start": "2026-10-17",
+            "end": "2026-10-19",
+            "n": 1000,
+            "population": "LV",
+            "D": 45,
+            "R": 49,
+            "margin": 4,
+            "url": "https://en.wikipedia.org/wiki/Emerson_College",
+            "trustedAs": "Emerson College"
+          },
           {
             "pollster": "University of Houston",
             "start": "2026-10-10",
@@ -735,54 +771,54 @@
           }
         ],
         "average": {
-          "margin": 2.6,
-          "D": 46.2,
+          "margin": 2.9,
+          "D": 46,
           "R": 48.8,
           "pollCount": 7,
-          "asOf": "2026-10-14",
-          "latestPoll": "2026-10-14",
+          "asOf": "2026-10-19",
+          "latestPoll": "2026-10-19",
           "contributions": [
             {
               "pollster": "University of Houston",
               "end": "2026-10-14",
-              "weight": 1.581,
+              "weight": 1.234,
               "adjustedMargin": 3
+            },
+            {
+              "pollster": "Emerson College",
+              "end": "2026-10-19",
+              "weight": 1.118,
+              "adjustedMargin": 4
             },
             {
               "pollster": "Marist University",
               "end": "2026-10-11",
-              "weight": 1.054,
+              "weight": 0.823,
               "adjustedMargin": 4
             },
             {
               "pollster": "University of Texas/Texas Politics Project",
               "end": "2026-10-05",
-              "weight": 0.664,
+              "weight": 0.519,
               "adjustedMargin": -1
             },
             {
               "pollster": "ReconMR/Siena University",
               "end": "2026-10-08",
-              "weight": 0.653,
+              "weight": 0.509,
               "adjustedMargin": 1
             },
             {
               "pollster": "Texas Southern University",
               "end": "2026-09-19",
-              "weight": 0.435,
+              "weight": 0.34,
               "adjustedMargin": 4
             },
             {
               "pollster": "Texas Public Opinion Research",
               "end": "2026-09-22",
-              "weight": 0.378,
+              "weight": 0.295,
               "adjustedMargin": 4
-            },
-            {
-              "pollster": "Emerson College",
-              "end": "2026-09-14",
-              "weight": 0.253,
-              "adjustedMargin": 3
             }
           ]
         }
