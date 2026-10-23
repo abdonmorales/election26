@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-22T11:59:32Z",
+  "updatedAt": "2026-10-23T17:13:22Z",
   "sources": {
     "wikipedia": {
       "name": "Wikipedia polling tables",
       "url": "https://en.wikipedia.org",
       "ok": true,
-      "updatedAt": "2026-10-22T11:59:32Z",
+      "updatedAt": "2026-10-23T17:13:22Z",
       "error": null,
       "errorSince": null
     }
@@ -19,7 +19,7 @@
           "D": "James Talarico",
           "R": "Ken Paxton"
         },
-        "totalPollsOnPage": 68,
+        "totalPollsOnPage": 72,
         "polls": [
           {
             "pollster": "Emerson College",
