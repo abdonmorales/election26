@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-23T17:13:22Z",
+  "updatedAt": "2026-10-23T21:28:15Z",
   "sources": {
     "wikipedia": {
       "name": "Wikipedia polling tables",
       "url": "https://en.wikipedia.org",
       "ok": true,
-      "updatedAt": "2026-10-23T17:13:22Z",
+      "updatedAt": "2026-10-23T21:28:15Z",
       "error": null,
       "errorSince": null
     }
@@ -19,7 +19,7 @@
           "D": "James Talarico",
           "R": "Ken Paxton"
         },
-        "totalPollsOnPage": 72,
+        "totalPollsOnPage": 75,
         "polls": [
           {
             "pollster": "Emerson College",
@@ -44,6 +44,18 @@
             "margin": -2,
             "url": "https://en.wikipedia.org/wiki/Emerson_College",
             "trustedAs": "Emerson College"
+          },
+          {
+            "pollster": "Texas Public Opinion Research (D)",
+            "start": "2026-10-15",
+            "end": "2026-10-18",
+            "n": 969,
+            "population": "LV",
+            "D": 51,
+            "R": 47,
+            "margin": -4,
+            "url": null,
+            "trustedAs": "TPOR"
           },
           {
             "pollster": "University of Houston",
@@ -383,9 +395,9 @@
           }
         ],
         "average": {
-          "margin": -2.2,
-          "D": 48.3,
-          "R": 46.1,
+          "margin": -2.4,
+          "D": 48.7,
+          "R": 46.4,
           "pollCount": 7,
           "asOf": "2026-10-19",
           "latestPoll": "2026-10-19",
@@ -401,6 +413,12 @@
               "end": "2026-10-19",
               "weight": 1.118,
               "adjustedMargin": -1
+            },
+            {
+              "pollster": "Texas Public Opinion Research (D)",
+              "end": "2026-10-18",
+              "weight": 1.047,
+              "adjustedMargin": -4
             },
             {
               "pollster": "Marist University",
@@ -425,12 +443,6 @@
               "end": "2026-09-19",
               "weight": 0.34,
               "adjustedMargin": -1
-            },
-            {
-              "pollster": "Texas Public Opinion Research (D)",
-              "end": "2026-09-22",
-              "weight": 0.295,
-              "adjustedMargin": -5
             }
           ]
         }
@@ -443,7 +455,7 @@
           "D": "Gina Hinojosa",
           "R": "Greg Abbott"
         },
-        "totalPollsOnPage": 59,
+        "totalPollsOnPage": 61,
         "polls": [
           {
             "pollster": "Emerson College",
@@ -456,6 +468,18 @@
             "margin": 4,
             "url": "https://en.wikipedia.org/wiki/Emerson_College",
             "trustedAs": "Emerson College"
+          },
+          {
+            "pollster": "Texas Public Opinion Research",
+            "start": "2026-10-15",
+            "end": "2026-10-18",
+            "n": 969,
+            "population": "LV",
+            "D": 48,
+            "R": 51,
+            "margin": 3,
+            "url": null,
+            "trustedAs": "TPOR"
           },
           {
             "pollster": "University of Houston",
@@ -772,8 +796,8 @@
         ],
         "average": {
           "margin": 2.9,
-          "D": 46,
-          "R": 48.8,
+          "D": 46.3,
+          "R": 49.2,
           "pollCount": 7,
           "asOf": "2026-10-19",
           "latestPoll": "2026-10-19",
@@ -789,6 +813,12 @@
               "end": "2026-10-19",
               "weight": 1.118,
               "adjustedMargin": 4
+            },
+            {
+              "pollster": "Texas Public Opinion Research",
+              "end": "2026-10-18",
+              "weight": 1.047,
+              "adjustedMargin": 3
             },
             {
               "pollster": "Marist University",
@@ -812,12 +842,6 @@
               "pollster": "Texas Southern University",
               "end": "2026-09-19",
               "weight": 0.34,
-              "adjustedMargin": 4
-            },
-            {
-              "pollster": "Texas Public Opinion Research",
-              "end": "2026-09-22",
-              "weight": 0.295,
               "adjustedMargin": 4
             }
           ]
