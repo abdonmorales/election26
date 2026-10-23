@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-22T21:41:13Z",
+  "updatedAt": "2026-10-23T04:58:18Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-22T21:41:13Z",
+      "updatedAt": "2026-10-23T04:58:18Z",
       "error": null,
       "errorSince": null
     },
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-22T21:41:13Z",
+      "updatedAt": "2026-10-23T04:58:18Z",
       "error": null,
       "errorSince": null
     }
@@ -25,8 +25,8 @@
         "market": "SENATETX-26",
         "title": "Texas Senate winner?",
         "url": "https://kalshi.com/markets/senatetx",
-        "probD": 67,
-        "probR": 33,
+        "probD": 66,
+        "probR": 34,
         "markets": {
           "R": {
             "ticker": "SENATETX-26-R",
@@ -37,7 +37,7 @@
           "D": {
             "ticker": "SENATETX-26-D",
             "name": "James Talarico",
-            "price": 0.68,
+            "price": 0.67,
             "basis": "mid"
           }
         }
@@ -46,19 +46,19 @@
         "market": "texas-senate-election-winner",
         "title": "Texas Senate Election Winner",
         "url": "https://polymarket.com/event/texas-senate-election-winner",
-        "probD": 67,
-        "probR": 33,
+        "probD": 66,
+        "probR": 34,
         "markets": {
           "D": {
             "id": "630963",
             "name": "James Talarico (D)",
-            "price": 0.68,
+            "price": 0.67,
             "basis": "mid"
           },
           "R": {
             "id": "630964",
             "name": "Ken Paxton (R)",
-            "price": 0.33,
+            "price": 0.34,
             "basis": "mid"
           }
         }
@@ -69,8 +69,8 @@
         "market": "GOVPARTYTX-26",
         "title": "Texas Governor winner?",
         "url": "https://kalshi.com/markets/govpartytx",
-        "probD": 34,
-        "probR": 66,
+        "probD": 33,
+        "probR": 67,
         "markets": {
           "D": {
             "ticker": "GOVPARTYTX-26-D",
@@ -81,7 +81,7 @@
           "R": {
             "ticker": "GOVPARTYTX-26-R",
             "name": "Greg Abbott",
-            "price": 0.67,
+            "price": 0.68,
             "basis": "mid"
           }
         }
@@ -102,7 +102,7 @@
           "R": {
             "id": "629691",
             "name": "Greg Abbott (R)",
-            "price": 0.69,
+            "price": 0.7,
             "basis": "mid"
           }
         }
