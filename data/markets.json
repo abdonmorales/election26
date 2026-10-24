@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-24T16:01:22Z",
+  "updatedAt": "2026-10-24T20:55:04Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-24T16:01:22Z",
+      "updatedAt": "2026-10-24T20:55:04Z",
       "error": null,
       "errorSince": null
     },
@@ -75,13 +75,13 @@
           "D": {
             "ticker": "GOVPARTYTX-26-D",
             "name": "Gina Hinojosa",
-            "price": 0.32,
+            "price": 0.31,
             "basis": "mid"
           },
           "R": {
             "ticker": "GOVPARTYTX-26-R",
             "name": "Greg Abbott",
-            "price": 0.71,
+            "price": 0.69,
             "basis": "mid"
           }
         }
