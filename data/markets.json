@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-24T04:43:26Z",
+  "updatedAt": "2026-10-24T11:09:00Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-24T04:43:26Z",
+      "updatedAt": "2026-10-24T11:09:00Z",
       "error": null,
       "errorSince": null
     },
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-24T04:43:26Z",
+      "updatedAt": "2026-10-24T11:09:00Z",
       "error": null,
       "errorSince": null
     }
@@ -69,19 +69,19 @@
         "market": "GOVPARTYTX-26",
         "title": "Texas Governor winner?",
         "url": "https://kalshi.com/markets/govpartytx",
-        "probD": 28,
-        "probR": 72,
+        "probD": 31,
+        "probR": 69,
         "markets": {
           "D": {
             "ticker": "GOVPARTYTX-26-D",
             "name": "Gina Hinojosa",
-            "price": 0.28,
+            "price": 0.31,
             "basis": "mid"
           },
           "R": {
             "ticker": "GOVPARTYTX-26-R",
             "name": "Greg Abbott",
-            "price": 0.73,
+            "price": 0.7,
             "basis": "mid"
           }
         }
@@ -90,19 +90,19 @@
         "market": "texas-governor-winner-2026",
         "title": "Texas Governor Election Winner",
         "url": "https://polymarket.com/event/texas-governor-winner-2026",
-        "probD": 27,
-        "probR": 73,
+        "probD": 29,
+        "probR": 71,
         "markets": {
           "D": {
             "id": "629690",
             "name": "Gina Hinojosa (D)",
-            "price": 0.27,
+            "price": 0.29,
             "basis": "mid"
           },
           "R": {
             "id": "629691",
             "name": "Greg Abbott (R)",
-            "price": 0.73,
+            "price": 0.71,
             "basis": "mid"
           }
         }
