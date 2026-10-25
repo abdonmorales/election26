@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-25T20:56:06Z",
+  "updatedAt": "2026-10-25T23:19:31Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-25T16:29:14Z",
+      "updatedAt": "2026-10-25T23:19:31Z",
       "error": null,
       "errorSince": null
     }
@@ -46,19 +46,19 @@
         "market": "texas-senate-election-winner",
         "title": "Texas Senate Election Winner",
         "url": "https://polymarket.com/event/texas-senate-election-winner",
-        "probD": 63,
-        "probR": 37,
+        "probD": 62,
+        "probR": 38,
         "markets": {
           "D": {
             "id": "630963",
             "name": "James Talarico (D)",
-            "price": 0.64,
+            "price": 0.63,
             "basis": "mid"
           },
           "R": {
             "id": "630964",
             "name": "Ken Paxton (R)",
-            "price": 0.37,
+            "price": 0.38,
             "basis": "mid"
           }
         }
