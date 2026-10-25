@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-25T16:29:14Z",
+  "updatedAt": "2026-10-25T20:56:06Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-25T11:38:53Z",
+      "updatedAt": "2026-10-25T20:56:06Z",
       "error": null,
       "errorSince": null
     },
@@ -69,19 +69,19 @@
         "market": "GOVPARTYTX-26",
         "title": "Texas Governor winner?",
         "url": "https://kalshi.com/markets/govpartytx",
-        "probD": 35,
-        "probR": 65,
+        "probD": 33,
+        "probR": 67,
         "markets": {
           "D": {
             "ticker": "GOVPARTYTX-26-D",
             "name": "Gina Hinojosa",
-            "price": 0.35,
+            "price": 0.34,
             "basis": "mid"
           },
           "R": {
             "ticker": "GOVPARTYTX-26-R",
             "name": "Greg Abbott",
-            "price": 0.66,
+            "price": 0.68,
             "basis": "mid"
           }
         }
