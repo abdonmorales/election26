@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-27T09:05:47Z",
+  "updatedAt": "2026-10-27T15:24:19Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-27T09:05:47Z",
+      "updatedAt": "2026-10-27T15:24:19Z",
       "error": null,
       "errorSince": null
     },
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-27T09:05:47Z",
+      "updatedAt": "2026-10-27T15:24:19Z",
       "error": null,
       "errorSince": null
     }
@@ -46,19 +46,19 @@
         "market": "texas-senate-election-winner",
         "title": "Texas Senate Election Winner",
         "url": "https://polymarket.com/event/texas-senate-election-winner",
-        "probD": 66,
-        "probR": 34,
+        "probD": 67,
+        "probR": 33,
         "markets": {
           "D": {
             "id": "630963",
             "name": "James Talarico (D)",
-            "price": 0.67,
+            "price": 0.68,
             "basis": "mid"
           },
           "R": {
             "id": "630964",
             "name": "Ken Paxton (R)",
-            "price": 0.34,
+            "price": 0.33,
             "basis": "mid"
           }
         }
@@ -81,7 +81,7 @@
           "R": {
             "ticker": "GOVPARTYTX-26-R",
             "name": "Greg Abbott",
-            "price": 0.68,
+            "price": 0.67,
             "basis": "mid"
           }
         }
@@ -102,7 +102,7 @@
           "R": {
             "id": "629691",
             "name": "Greg Abbott (R)",
-            "price": 0.69,
+            "price": 0.67,
             "basis": "mid"
           }
         }

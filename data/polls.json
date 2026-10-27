@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-24T04:43:26Z",
+  "updatedAt": "2026-10-27T15:24:19Z",
   "sources": {
     "wikipedia": {
       "name": "Wikipedia polling tables",
       "url": "https://en.wikipedia.org",
       "ok": true,
-      "updatedAt": "2026-10-24T04:43:26Z",
+      "updatedAt": "2026-10-27T15:24:19Z",
       "error": null,
       "errorSince": null
     }
@@ -19,7 +19,7 @@
           "D": "James Talarico",
           "R": "Ken Paxton"
         },
-        "totalPollsOnPage": 75,
+        "totalPollsOnPage": 76,
         "polls": [
           {
             "pollster": "Emerson College",
@@ -455,7 +455,7 @@
           "D": "Gina Hinojosa",
           "R": "Greg Abbott"
         },
-        "totalPollsOnPage": 65,
+        "totalPollsOnPage": 66,
         "polls": [
           {
             "pollster": "Emerson College",
