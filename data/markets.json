@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-27T00:30:34Z",
+  "updatedAt": "2026-10-27T09:05:47Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-27T00:30:34Z",
+      "updatedAt": "2026-10-27T09:05:47Z",
       "error": null,
       "errorSince": null
     },
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-27T00:30:34Z",
+      "updatedAt": "2026-10-27T09:05:47Z",
       "error": null,
       "errorSince": null
     }
@@ -46,19 +46,19 @@
         "market": "texas-senate-election-winner",
         "title": "Texas Senate Election Winner",
         "url": "https://polymarket.com/event/texas-senate-election-winner",
-        "probD": 64,
-        "probR": 36,
+        "probD": 66,
+        "probR": 34,
         "markets": {
           "D": {
             "id": "630963",
             "name": "James Talarico (D)",
-            "price": 0.65,
+            "price": 0.67,
             "basis": "mid"
           },
           "R": {
             "id": "630964",
             "name": "Ken Paxton (R)",
-            "price": 0.36,
+            "price": 0.34,
             "basis": "mid"
           }
         }
@@ -69,19 +69,19 @@
         "market": "GOVPARTYTX-26",
         "title": "Texas Governor winner?",
         "url": "https://kalshi.com/markets/govpartytx",
-        "probD": 31,
-        "probR": 69,
+        "probD": 33,
+        "probR": 67,
         "markets": {
           "D": {
             "ticker": "GOVPARTYTX-26-D",
             "name": "Gina Hinojosa",
-            "price": 0.31,
+            "price": 0.33,
             "basis": "mid"
           },
           "R": {
             "ticker": "GOVPARTYTX-26-R",
             "name": "Greg Abbott",
-            "price": 0.69,
+            "price": 0.68,
             "basis": "mid"
           }
         }
@@ -96,13 +96,13 @@
           "D": {
             "id": "629690",
             "name": "Gina Hinojosa (D)",
-            "price": 0.31,
+            "price": 0.32,
             "basis": "mid"
           },
           "R": {
             "id": "629691",
             "name": "Greg Abbott (R)",
-            "price": 0.67,
+            "price": 0.69,
             "basis": "mid"
           }
         }
