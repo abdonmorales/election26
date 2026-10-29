@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-28T20:20:21Z",
+  "updatedAt": "2026-10-29T18:31:14Z",
   "sources": {
     "wikipedia": {
       "name": "Wikipedia polling tables",
       "url": "https://en.wikipedia.org",
       "ok": true,
-      "updatedAt": "2026-10-28T20:20:21Z",
+      "updatedAt": "2026-10-29T18:31:14Z",
       "error": null,
       "errorSince": null
     }
@@ -19,8 +19,20 @@
           "D": "James Talarico",
           "R": "Ken Paxton"
         },
-        "totalPollsOnPage": 77,
+        "totalPollsOnPage": 80,
         "polls": [
+          {
+            "pollster": "Texas Southern University",
+            "start": "2026-10-21",
+            "end": "2026-10-25",
+            "n": 2000,
+            "population": "LV",
+            "D": 49,
+            "R": 47,
+            "margin": -2,
+            "url": "https://en.wikipedia.org/wiki/Texas_Southern_University",
+            "trustedAs": "Texas Southern University (Texas Tribune partner)"
+          },
           {
             "pollster": "Emerson College",
             "start": "2026-10-17",
@@ -395,54 +407,54 @@
           }
         ],
         "average": {
-          "margin": -2.4,
-          "D": 48.7,
-          "R": 46.4,
+          "margin": -2.3,
+          "D": 48.9,
+          "R": 46.6,
           "pollCount": 7,
-          "asOf": "2026-10-19",
-          "latestPoll": "2026-10-19",
+          "asOf": "2026-10-25",
+          "latestPoll": "2026-10-25",
           "contributions": [
+            {
+              "pollster": "Texas Southern University",
+              "end": "2026-10-25",
+              "weight": 1.581,
+              "adjustedMargin": -2
+            },
             {
               "pollster": "University of Houston",
               "end": "2026-10-14",
-              "weight": 1.234,
+              "weight": 0.917,
               "adjustedMargin": -2
             },
             {
               "pollster": "Emerson College",
               "end": "2026-10-19",
-              "weight": 1.118,
+              "weight": 0.831,
               "adjustedMargin": -1
             },
             {
               "pollster": "Texas Public Opinion Research (D)",
               "end": "2026-10-18",
-              "weight": 1.047,
+              "weight": 0.778,
               "adjustedMargin": -4
             },
             {
               "pollster": "Marist University",
               "end": "2026-10-11",
-              "weight": 0.823,
+              "weight": 0.611,
               "adjustedMargin": -2
             },
             {
               "pollster": "University of Texas/Texas Politics Project",
               "end": "2026-10-05",
-              "weight": 0.519,
+              "weight": 0.385,
               "adjustedMargin": -3
             },
             {
               "pollster": "ReconMR/Siena University",
               "end": "2026-10-08",
-              "weight": 0.509,
+              "weight": 0.378,
               "adjustedMargin": -4
-            },
-            {
-              "pollster": "Texas Southern University",
-              "end": "2026-09-19",
-              "weight": 0.34,
-              "adjustedMargin": -1
             }
           ]
         }
@@ -455,8 +467,20 @@
           "D": "Gina Hinojosa",
           "R": "Greg Abbott"
         },
-        "totalPollsOnPage": 67,
+        "totalPollsOnPage": 69,
         "polls": [
+          {
+            "pollster": "Texas Southern University",
+            "start": "2026-10-21",
+            "end": "2026-10-25",
+            "n": 2000,
+            "population": "LV",
+            "D": 47,
+            "R": 50,
+            "margin": 3,
+            "url": "https://en.wikipedia.org/wiki/Texas_Southern_University",
+            "trustedAs": "Texas Southern University (Texas Tribune partner)"
+          },
           {
             "pollster": "Emerson College",
             "start": "2026-10-17",
@@ -795,54 +819,54 @@
           }
         ],
         "average": {
-          "margin": 2.9,
-          "D": 46.3,
-          "R": 49.2,
+          "margin": 2.8,
+          "D": 46.6,
+          "R": 49.4,
           "pollCount": 7,
-          "asOf": "2026-10-19",
-          "latestPoll": "2026-10-19",
+          "asOf": "2026-10-25",
+          "latestPoll": "2026-10-25",
           "contributions": [
+            {
+              "pollster": "Texas Southern University",
+              "end": "2026-10-25",
+              "weight": 1.581,
+              "adjustedMargin": 3
+            },
             {
               "pollster": "University of Houston",
               "end": "2026-10-14",
-              "weight": 1.234,
+              "weight": 0.917,
               "adjustedMargin": 3
             },
             {
               "pollster": "Emerson College",
               "end": "2026-10-19",
-              "weight": 1.118,
+              "weight": 0.831,
               "adjustedMargin": 4
             },
             {
               "pollster": "Texas Public Opinion Research",
               "end": "2026-10-18",
-              "weight": 1.047,
+              "weight": 0.778,
               "adjustedMargin": 3
             },
             {
               "pollster": "Marist University",
               "end": "2026-10-11",
-              "weight": 0.823,
+              "weight": 0.611,
               "adjustedMargin": 4
             },
             {
               "pollster": "University of Texas/Texas Politics Project",
               "end": "2026-10-05",
-              "weight": 0.519,
+              "weight": 0.385,
               "adjustedMargin": -1
             },
             {
               "pollster": "ReconMR/Siena University",
               "end": "2026-10-08",
-              "weight": 0.509,
+              "weight": 0.378,
               "adjustedMargin": 1
-            },
-            {
-              "pollster": "Texas Southern University",
-              "end": "2026-09-19",
-              "weight": 0.34,
-              "adjustedMargin": 4
             }
           ]
         }
