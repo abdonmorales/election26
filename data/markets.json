@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-29T01:01:16Z",
+  "updatedAt": "2026-10-29T10:04:31Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-29T01:01:16Z",
+      "updatedAt": "2026-10-29T10:04:31Z",
       "error": null,
       "errorSince": null
     },
@@ -31,7 +31,7 @@
           "R": {
             "ticker": "SENATETX-26-R",
             "name": "Ken Paxton",
-            "price": 0.33,
+            "price": 0.32,
             "basis": "mid"
           },
           "D": {
@@ -81,7 +81,7 @@
           "R": {
             "ticker": "GOVPARTYTX-26-R",
             "name": "Greg Abbott",
-            "price": 0.65,
+            "price": 0.64,
             "basis": "mid"
           }
         }
