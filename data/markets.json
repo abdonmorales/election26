@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-29T18:31:14Z",
+  "updatedAt": "2026-10-30T01:06:03Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-29T18:31:14Z",
+      "updatedAt": "2026-10-30T01:06:03Z",
       "error": null,
       "errorSince": null
     }
@@ -58,7 +58,7 @@
           "R": {
             "id": "630964",
             "name": "Ken Paxton (R)",
-            "price": 0.32,
+            "price": 0.31,
             "basis": "mid"
           }
         }
@@ -90,19 +90,19 @@
         "market": "texas-governor-winner-2026",
         "title": "Texas Governor Election Winner",
         "url": "https://polymarket.com/event/texas-governor-winner-2026",
-        "probD": 36,
-        "probR": 64,
+        "probD": 37,
+        "probR": 63,
         "markets": {
           "D": {
             "id": "629690",
             "name": "Gina Hinojosa (D)",
-            "price": 0.36,
+            "price": 0.37,
             "basis": "mid"
           },
           "R": {
             "id": "629691",
             "name": "Greg Abbott (R)",
-            "price": 0.64,
+            "price": 0.63,
             "basis": "mid"
           }
         }
