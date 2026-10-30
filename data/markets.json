@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T18:03:08Z",
+  "updatedAt": "2026-10-30T22:25:53Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-30T18:03:08Z",
+      "updatedAt": "2026-10-30T22:25:53Z",
       "error": null,
       "errorSince": null
     }
@@ -90,13 +90,13 @@
         "market": "texas-governor-winner-2026",
         "title": "Texas Governor Election Winner",
         "url": "https://polymarket.com/event/texas-governor-winner-2026",
-        "probD": 39,
-        "probR": 61,
+        "probD": 38,
+        "probR": 62,
         "markets": {
           "D": {
             "id": "629690",
             "name": "Gina Hinojosa (D)",
-            "price": 0.39,
+            "price": 0.38,
             "basis": "mid"
           },
           "R": {
