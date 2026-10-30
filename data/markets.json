@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T10:08:04Z",
+  "updatedAt": "2026-10-30T18:03:08Z",
   "sources": {
     "kalshi": {
       "name": "Kalshi",
       "url": "https://kalshi.com",
       "ok": true,
-      "updatedAt": "2026-10-30T10:08:04Z",
+      "updatedAt": "2026-10-30T18:03:08Z",
       "error": null,
       "errorSince": null
     },
@@ -14,7 +14,7 @@
       "name": "Polymarket",
       "url": "https://polymarket.com",
       "ok": true,
-      "updatedAt": "2026-10-30T10:08:04Z",
+      "updatedAt": "2026-10-30T18:03:08Z",
       "error": null,
       "errorSince": null
     }
@@ -25,19 +25,19 @@
         "market": "SENATETX-26",
         "title": "Texas Senate winner?",
         "url": "https://kalshi.com/markets/senatetx",
-        "probD": 69,
-        "probR": 31,
+        "probD": 71,
+        "probR": 29,
         "markets": {
           "R": {
             "ticker": "SENATETX-26-R",
             "name": "Ken Paxton",
-            "price": 0.31,
+            "price": 0.29,
             "basis": "mid"
           },
           "D": {
             "ticker": "SENATETX-26-D",
             "name": "James Talarico",
-            "price": 0.7,
+            "price": 0.72,
             "basis": "mid"
           }
         }
@@ -52,7 +52,7 @@
           "D": {
             "id": "630963",
             "name": "James Talarico (D)",
-            "price": 0.71,
+            "price": 0.72,
             "basis": "mid"
           },
           "R": {

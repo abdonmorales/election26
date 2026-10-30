@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T01:06:03Z",
+  "updatedAt": "2026-10-30T18:03:08Z",
   "sources": {
     "wikipedia": {
       "name": "Wikipedia polling tables",
       "url": "https://en.wikipedia.org",
       "ok": true,
-      "updatedAt": "2026-10-30T01:06:03Z",
+      "updatedAt": "2026-10-30T18:03:08Z",
       "error": null,
       "errorSince": null
     }
@@ -19,7 +19,7 @@
           "D": "James Talarico",
           "R": "Ken Paxton"
         },
-        "totalPollsOnPage": 82,
+        "totalPollsOnPage": 83,
         "polls": [
           {
             "pollster": "Texas Southern University",
@@ -467,7 +467,7 @@
           "D": "Gina Hinojosa",
           "R": "Greg Abbott"
         },
-        "totalPollsOnPage": 69,
+        "totalPollsOnPage": 70,
         "polls": [
           {
             "pollster": "Texas Southern University",
